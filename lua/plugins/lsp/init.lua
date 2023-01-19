@@ -56,8 +56,6 @@ return {
           nls.builtins.formatting.clang_format,
           nls.builtins.formatting.cmake_format,
           nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.isort,
-          nls.builtins.formatting.black,
           nls.builtins.formatting.prettierd.with({
             filetypes = { "markdown" }, -- only runs `deno fmt` for markdown
           }),
