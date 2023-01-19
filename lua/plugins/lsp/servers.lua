@@ -17,12 +17,15 @@ local servers = {
   pylsp = {
     pylsp = {
       plugins = {
-        pylint = { enabled = true, executable = "pylint" },
-        pyflakes = { enabled = false },
-        pycodestyle = { enabled = false },
         jedi_completion = { fuzzy = true },
+        pydocstyle = { enabled = true },
+        pylint = { enabled = true, executable = "pylint" },
+        rope_autoimport = { enabled = true },
+        rope_completion = { enabled = true },
         pyls_isort = { enabled = true },
         pylsp_mypy = { enabled = true },
+        black = { enabled = true },
+        isort = { enabled = true },
       },
     },
   },
