@@ -10,9 +10,9 @@ local servers = {
   jsonls = {},
   yamlls = {},
   nil_ls = {
-    formatting = {
-      command = { "nixpkgs-fmt" },
-    },
+    -- formatting = {
+    --   command = { "nixpkgs-fmt" },
+    -- },
   },
   pylsp = {
     pylsp = {

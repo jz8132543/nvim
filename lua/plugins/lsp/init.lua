@@ -9,12 +9,13 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    event = "BufRead",
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
       { "folke/neodev.nvim", config = true },
       { "williamboman/mason.nvim", config = true, cmd = "Mason" },
-      { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = false } },
+      { "williamboman/mason-lspconfig.nvim", config = true },
+      { "WhoIsSethDaniel/mason-tool-installer.nvim", config = true },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
@@ -42,42 +43,42 @@ return {
   },
 
   -- formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    config = function()
-      local nls = require("null-ls")
-      nls.setup({
-        debounce = 150,
-        save_after_format = false,
-        sources = {
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.nixpkgs_fmt,
-          nls.builtins.formatting.clang_format,
-          nls.builtins.formatting.cmake_format,
-          nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.prettierd.with({
-            filetypes = { "markdown" }, -- only runs `deno fmt` for markdown
-          }),
-          -- nls.builtins.formatting.prettierd,
-          -- nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
-          -- nls.builtins.formatting.eslint_d,
-          -- nls.builtins.diagnostics.shellcheck,
-          -- nls.builtins.diagnostics.luacheck,
-          nls.builtins.diagnostics.cmake_lint,
-          nls.builtins.diagnostics.markdownlint,
-          nls.builtins.diagnostics.selene.with({
-            condition = function(utils)
-              return utils.root_has_file({ "selene.toml" })
-            end,
-          }),
-          -- nls.builtins.code_actions.gitsigns,
-          -- nls.builtins.diagnostics.flake8,
-        },
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
-      })
-    end,
-  },
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local nls = require("null-ls")
+  --     nls.setup({
+  --       debounce = 150,
+  --       save_after_format = false,
+  --       sources = {
+  --         nls.builtins.formatting.stylua,
+  --         nls.builtins.formatting.nixpkgs_fmt,
+  --         nls.builtins.formatting.clang_format,
+  --         nls.builtins.formatting.cmake_format,
+  --         nls.builtins.formatting.shfmt,
+  --         nls.builtins.formatting.prettierd.with({
+  --           filetypes = { "markdown" }, -- only runs `deno fmt` for markdown
+  --         }),
+  --         -- nls.builtins.formatting.prettierd,
+  --         -- nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
+  --         -- nls.builtins.formatting.eslint_d,
+  --         -- nls.builtins.diagnostics.shellcheck,
+  --         -- nls.builtins.diagnostics.luacheck,
+  --         nls.builtins.diagnostics.cmake_lint,
+  --         nls.builtins.diagnostics.markdownlint,
+  --         nls.builtins.diagnostics.selene.with({
+  --           condition = function(utils)
+  --             return utils.root_has_file({ "selene.toml" })
+  --           end,
+  --         }),
+  --         -- nls.builtins.code_actions.gitsigns,
+  --         -- nls.builtins.diagnostics.flake8,
+  --       },
+  --       root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
+  --     })
+  --   end,
+  -- },
 
   -- UI
   {

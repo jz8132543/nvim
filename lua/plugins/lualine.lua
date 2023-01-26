@@ -53,7 +53,7 @@ return {
           end
           msg = table.concat(client_names, "·")
         end
-        return " LSP:" .. msg
+        return msg
       end
 
       require("lualine").setup({
@@ -81,30 +81,20 @@ return {
           },
           lualine_c = {
             {
-              "filename",
-              path = 1,
-              symbols = {
-                modified = "[+]",
-                readonly = "[]",
-                unnamed = "[No Name]",
-              },
-              fmt = fileNameAndSize,
+              "diff",
+              symbols = { added = "+", modified = "~", removed = "-" },
+              -- symbols = { added = ' ', modified = ' ', removed = ' ' },
             },
           },
           -- Right
           lualine_x = {
-            { lsp_progress },
+            -- { lsp_progress },
             {
               "diagnostics",
               sources = { "nvim_diagnostic" },
               -- symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
               symbols = { error = " ", warn = " ", info = " ", hint = " " },
               -- symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
-            },
-            {
-              "diff",
-              symbols = { added = "+", modified = "~", removed = "-" },
-              -- symbols = { added = ' ', modified = ' ', removed = ' ' },
             },
           },
           lualine_y = {

@@ -56,11 +56,11 @@ return {
             mode = "symbol_text",
             maxwidth = 50,
             menu = {
-              buffer = "[Buf]",
               nvim_lsp = "[LSP]",
+              buffer = "[Buf]",
+              path = "[Path]",
               luasnip = "[Snip]",
               nvim_lua = "[Lua]",
-              path = "[Path]",
             },
           }),
         },

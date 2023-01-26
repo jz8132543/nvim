@@ -1,23 +1,34 @@
 return {
   -- vscode like colorscheme
+  -- {
+  --   "Mofiqul/vscode.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.o.background = "dark"
+  --     local c = require("vscode.colors").get_colors()
+  --     require("vscode").setup({
+  --       transparent = false,
+  --       italic_comments = true,
+  --       disable_nvimtree_bg = true,
+  --       color_overrides = {
+  --         vscLineNumber = "#FFFFFF",
+  --       },
+  --       group_overrides = {
+  --         Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
+  --       },
+  --     })
+  --   end,
+  -- },
+
   {
-    "Mofiqul/vscode.nvim",
+    "rose-pine/neovim",
+    name = "rose-pine",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.o.background = "dark"
-      local c = require("vscode.colors").get_colors()
-      require("vscode").setup({
-        transparent = false,
-        italic_comments = true,
-        disable_nvimtree_bg = true,
-        color_overrides = {
-          vscLineNumber = "#FFFFFF",
-        },
-        group_overrides = {
-          Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
-        },
-      })
+      require("rose-pine").setup()
+      vim.cmd("colorscheme rose-pine")
     end,
   },
 

@@ -19,9 +19,21 @@ return {
 
   -- bufferline
   {
-    "akinsho/nvim-bufferline.lua",
-    event = "BufAdd",
-    config = true,
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp",
+        offsets = {
+          {
+            filetype = "NvimTree",
+            text = "File Explorer",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
+      },
+    },
   },
 
   -- indent guides for Neovim
@@ -44,7 +56,7 @@ return {
     opts = {
       lsp = {
         progress = {
-          enabled = false,
+          enabled = true,
         },
         -- override = {
         --   ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
