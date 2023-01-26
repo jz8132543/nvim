@@ -1,43 +1,13 @@
 return {
-  -- vscode like colorscheme
-  -- {
-  --   "Mofiqul/vscode.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.o.background = "dark"
-  --     local c = require("vscode.colors").get_colors()
-  --     require("vscode").setup({
-  --       transparent = false,
-  --       italic_comments = true,
-  --       disable_nvimtree_bg = true,
-  --       color_overrides = {
-  --         vscLineNumber = "#FFFFFF",
-  --       },
-  --       group_overrides = {
-  --         Cursor = { fg = c.vscDarkBlue, bg = c.vscLightGreen, bold = true },
-  --       },
-  --     })
-  --   end,
-  -- },
-
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("rose-pine").setup()
-      vim.cmd("colorscheme rose-pine")
-    end,
-  },
-
-  -- catppuccin
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    lazy = false,
     priority = 1000,
-    opts = function()
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha",
+      })
       vim.cmd.colorscheme("catppuccin")
     end,
   },
