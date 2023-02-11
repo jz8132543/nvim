@@ -40,12 +40,12 @@ function M.on_attach(client, buffer)
     },
     g = {
       name = "+goto",
-      d = { "<cmd>Lspsaga peek_definition<cr>", "Goto Definition" },
-      r = { "<cmd>Telescope lsp_references<cr>", "References" },
+      d = { "<cmd>Glance definitions<cr>", "Goto Definition" },
+      r = { "<cmd>Glance references<cr>", "References" },
       R = { "<cmd>Trouble lsp_references<cr>", "Trouble References" },
       D = { "<cmd>Telescope lsp_declarations<CR>", "Goto Declaration" },
-      I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
-      t = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
+      I = { "<cmd>Glance implementations<CR>", "Goto Implementation" },
+      t = { "<cmd>Glance type_definitions<cr>", "Goto Type Definition" },
       h = { "<cmd>Lspsaga lsp_finder<CR>", "LSP finder" }
     },
     ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help", mode = { "n", "i" } },

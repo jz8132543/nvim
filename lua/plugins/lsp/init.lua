@@ -52,8 +52,8 @@ return {
         debounce = 150,
         save_after_format = false,
         sources = {
-          --         nls.builtins.formatting.stylua,
-          --         nls.builtins.formatting.nixpkgs_fmt,
+          nls.builtins.formatting.stylua,
+          nls.builtins.formatting.nixpkgs_fmt,
           --         nls.builtins.formatting.clang_format,
           --         nls.builtins.formatting.cmake_format,
           --         nls.builtins.formatting.shfmt,
@@ -81,11 +81,16 @@ return {
   },
 
   -- UI
+  -- {
+  --   "glepnir/lspsaga.nvim",
+  --   event = "BufRead",
+  --   config = function()
+  --     require("lspsaga").setup({})
+  --   end,
+  -- },
   {
-    "glepnir/lspsaga.nvim",
+    "dnlhc/glance.nvim",
     event = "BufRead",
-    config = function()
-      require("lspsaga").setup({})
-    end,
+    config = true,
   },
 }
