@@ -9,7 +9,7 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    event = "BufRead",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
       { "folke/neodev.nvim", config = true },
@@ -81,13 +81,11 @@ return {
   },
 
   -- UI
-  -- {
-  --   "glepnir/lspsaga.nvim",
-  --   event = "BufRead",
-  --   config = function()
-  --     require("lspsaga").setup({})
-  --   end,
-  -- },
+  {
+    "glepnir/lspsaga.nvim",
+    event = "LspAttach",
+    opts = true,
+  },
   {
     "dnlhc/glance.nvim",
     event = "BufRead",
