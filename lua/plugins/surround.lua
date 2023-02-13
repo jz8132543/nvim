@@ -3,15 +3,15 @@ return {
   {
     "kylechui/nvim-surround",
     keys = {
-      { "n", "ys" },
-      { "n", "yS" },
-      { "n", "cs" },
-      { "n", "cS" },
-      { "n", "ds" },
-      { "n", "dS" },
-      { "x", "gs" },
-      { "x", "gS" },
-      { "i", "<C-g>" },
+      { "ys" },
+      { "yS" },
+      { "cs" },
+      { "cS" },
+      { "ds" },
+      { "dS" },
+      { "gs", mode = "x" },
+      { "gS", mode = "x" },
+      { "<C-g>", mode = "i" },
     },
     config = function()
       require("nvim-surround").setup({

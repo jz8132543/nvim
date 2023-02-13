@@ -4,10 +4,10 @@ return {
     dependencies = {
       "kevinhwang91/promise-async",
     },
-    config = true,
     keys = {
-      { "<leader>zR", require("ufo").openAllFolds, desc = "Open All Folds" },
-      { "<leader>zM", require("ufo").closeAllFolds, desc = "Close All Folds" },
+      { "<leader>zR", "<cmd>lua require('ufo').openAllFolds<cr>", desc = "Open All Folds" },
+      { "<leader>zM", "<cmd>lua require('ufo').closeAllFolds<cr>", desc = "Close All Folds" },
     },
+    opts = true,
   },
 }

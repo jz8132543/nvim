@@ -6,9 +6,10 @@ return {
     config = function()
       local wk = require("which-key")
       wk.register({
-        f = { name = "+file" },
-        g = { name = "+git" },
-        b = { name = "+buffer" },
+        f = { name = "File" },
+        g = { name = "Git" },
+        b = { name = "Buffer" },
+        ["<F9>"] = { name = "Run" },
       }, { prefix = "<leader>" })
       wk.setup({
         plugins = {
