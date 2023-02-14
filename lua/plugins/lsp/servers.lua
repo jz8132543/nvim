@@ -9,7 +9,12 @@ local servers = {
   html = {},
   jsonls = {},
   yamlls = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    diagnostics = { experimental = { enable = true } },
+    checkOnSave = {
+      command = "clippy",
+    },
+  },
   nil_ls = {
     formatting = {
       command = { "nixpkgs-fmt" },
