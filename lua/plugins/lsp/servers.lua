@@ -9,6 +9,7 @@ local servers = {
   html = {},
   jsonls = {},
   yamlls = {},
+  rust_analyzer = {},
   nil_ls = {
     formatting = {
       command = { "nixpkgs-fmt" },

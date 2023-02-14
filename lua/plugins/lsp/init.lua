@@ -33,7 +33,7 @@ return {
 
       -- lspconfig
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      capabilities.offsetEncoding = "utf-8"
+      -- capabilities.offsetEncoding = "utf-8"
       for server, opts in pairs(servers) do
         opts.capabilities = capabilities
         opts.on_attach = on_attach
@@ -90,5 +90,18 @@ return {
     "dnlhc/glance.nvim",
     event = "BufRead",
     config = true,
+  },
+  {
+    "folke/trouble.nvim",
+    event = "BufRead",
+    config = true,
+    keys = {
+      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "TroubleToggle" },
+      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
+      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "document diagnostics" },
+      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
+      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "loclist" },
+      { "gR", "<cmd>TroubleToggle lsp_references<cr>", desc = "References" },
+    },
   },
 }

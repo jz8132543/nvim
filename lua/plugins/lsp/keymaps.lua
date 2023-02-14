@@ -42,11 +42,10 @@ function M.on_attach(client, buffer)
       name = "+goto",
       d = { "<cmd>Glance definitions<cr>", "Goto Definition" },
       r = { "<cmd>Glance references<cr>", "References" },
-      R = { "<cmd>Trouble lsp_references<cr>", "Trouble References" },
-      D = { "<cmd>Telescope lsp_declarations<CR>", "Goto Declaration" },
-      I = { "<cmd>Glance implementations<CR>", "Goto Implementation" },
+      i = { "<cmd>Glance implementations<CR>", "Goto Implementation" },
       t = { "<cmd>Glance type_definitions<cr>", "Goto Type Definition" },
-      h = { "<cmd>Lspsaga lsp_finder<CR>", "LSP finder" }
+      D = { "<cmd>Telescope lsp_declarations<CR>", "Goto Declaration" },
+      h = { "<cmd>Lspsaga lsp_finder<CR>", "LSP finder" },
     },
     ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help", mode = { "n", "i" } },
     ["K"] = { "<cmd>Lspsaga hover_doc<CR>", "Hover" },
@@ -55,15 +54,17 @@ function M.on_attach(client, buffer)
     ["[w"] = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Prev WARN" },
     ["]w"] = { "<cmd>Lspsaga diagnostic_jump_next<CR>", "Next WANR" },
     ["[e"] = {
-      function() require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
+      function()
+        require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+      end,
       "Prev Error",
     },
     ["]e"] = {
-      function() require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+      function()
+        require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+      end,
       "Next Error",
     },
-    ['<A-d>'] = { "<cmd>Lspsaga open_floaterm<CR>", "Float terminal" },
-    ['A-d'] = { [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], mode = "t" },
   })
 end
 
