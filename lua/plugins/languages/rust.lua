@@ -9,6 +9,14 @@ return {
           use_telescope = true,
         },
       },
+      settings = {
+        ["rust-analyzer"] = {
+          checkOnSave = {
+            command = "clippy",
+            allTargets = false,
+          },
+        },
+      },
     },
   },
 }

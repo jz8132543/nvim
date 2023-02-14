@@ -1,1 +1,1 @@
-autocmd TextChanged,TextChangedI * silent write
+"autocmd CursorHold,CursorHoldI *.rs :w

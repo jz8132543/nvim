@@ -11,8 +11,9 @@ local servers = {
   yamlls = {},
   rust_analyzer = {
     diagnostics = { experimental = { enable = true } },
-    checkOnSave = {
+    check = {
       command = "clippy",
+      allTargets = false,
     },
   },
   nil_ls = {
