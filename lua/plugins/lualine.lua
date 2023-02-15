@@ -10,52 +10,6 @@ return {
         return " " .. (str == "V-LINE" and "VL" or (str == "V-BLOCK" and "VB" or str:sub(1, 1)))
       end
 
-      -- For filename, show the filename and the filesize
-      local function fileNameAndSize(str)
-        -- For doc, only show filename
-        if string.find(str, ".*/doc/.*%.txt") then
-          str = vim.fn.expand("%:t")
-        end
-        local size = require("lualine.components.filesize")()
-        return size == "" and str or str .. " [" .. size .. "]"
-      end
-
-      -- Customized location
-      local function customLocation()
-        return "%3l/%-3L:%-2v [%3p%%]"
-      end
-
-      -- Output LSP progress
-      local function lsp_progress()
-        local messages = lsp.util.get_progress_messages()[1]
-        if not messages then
-          return ""
-        end
-        local name = messages.name or ""
-        local msg = messages.message or ""
-        local percentage = messages.percentage or 0
-        local title = messages.title or ""
-        local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        local ms = vim.loop.hrtime() / 1000000
-        local frame = math.floor(ms / 120) % #spinners
-        return string.format(" %%<%s %s: %s %s (%s%%%%) ", spinners[frame + 1], name, title, msg, percentage)
-      end
-
-      -- Output the LSP client names attached to the current buffer
-      local function lsp_client_names()
-        local bufnr = vim.api.nvim_get_current_buf()
-        local clients = lsp.get_active_clients({ bufnr = bufnr })
-        local client_names = {}
-        local msg = "None"
-        if #clients > 0 then
-          for _, client in pairs(clients) do
-            client_names[#client_names + 1] = client.name
-          end
-          msg = table.concat(client_names, "·")
-        end
-        return msg
-      end
-
       require("lualine").setup({
         options = {
           icons_enabled = true,
@@ -84,11 +38,9 @@ return {
               "diff",
               symbols = { added = "+", modified = "~", removed = "-" },
             },
-            { "b:coc_current_function" }
           },
           -- Right
           lualine_x = {
-            -- { lsp_progress },
             {
               "diagnostics",
               sources = { "coc" },
@@ -102,7 +54,7 @@ return {
             { "coc#status" },
           },
           lualine_z = {
-            customLocation,
+            { "location" },
           },
         },
 
@@ -116,10 +68,10 @@ return {
         },
         tabline = {},
         extensions = {
-          "aerial",
-          "fugitive",
-          "man",
-          "quickfix",
+          -- "aerial",
+          -- "fugitive",
+          -- "man",
+          -- "quickfix",
         },
       })
     end,

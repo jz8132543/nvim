@@ -20,8 +20,25 @@
     "border": true
   },
   "sumneko-lua.enableNvimLuaDev": true,
-  "Lua.format.defaultConfig": {
-    "indent_style": "space",
-    "indent_size": "2"
+  "diagnostic-languageserver": {
+    "formatters": {
+      "stylua": {
+        "command": "stylua",
+        "args": [
+          "--search-parent-directories",
+          "--stdin-filepath",
+          "%filepath",
+          "--",
+          "-"
+        ],
+        "rootPatterns": [
+          "stylua.toml",
+          ".stylua.toml"
+        ],
+      },
+    },
+    "formatFiletypes": {
+      "lua": "stylua",
+    },
   },
 }

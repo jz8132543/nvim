@@ -5,6 +5,7 @@ return {
     dependencies = {
       "tsakirist/telescope-lazy.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
+      "fannheyward/telescope-coc.nvim",
     },
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
@@ -13,6 +14,15 @@ return {
       { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find in Files (Grep)" },
       { "<leader>fl", "<cmd>Telescope lazy<cr>", desc = "Lazy Files" },
       { "<leader>fb", "<cmd>Telescope file_browser<cr>", desc = "Lazy Browser" },
+      { "<leader>cc", "<cmd>Telescope coc commands<cr>", desc = "Commands" },
+      { "<leader>cd", "<cmd>Telescope coc diagnostics<cr>", desc = "Diagnostics" },
+      { "<leader>cD", "<cmd>Telescope coc workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
+      { "<leader>cs", "<cmd>Telescope coc document_symbols<cr>", desc = "Document Symbols" },
+      { "<leader>cS", "<cmd>Telescope coc workspace_symbols<cr>", desc = "Workspace Symbols" },
+      { "gd", "<cmd>Telescope coc definitions<cr>", desc = "Definitions" },
+      { "gi", "<cmd>Telescope coc implementations<cr>", desc = "Implementations" },
+      { "gr", "<cmd>Telescope coc references<cr>", desc = "References" },
+      { "gt", "<cmd>Telescope coc type_definitions<cr>", desc = "Type Definitions" },
     },
     config = function()
       local actions = require("telescope.actions")
@@ -35,9 +45,11 @@ return {
             mappings = mappings,
           },
         },
+        coc = {},
       })
       require("telescope").load_extension("lazy")
       require("telescope").load_extension("file_browser")
+      require("telescope").load_extension("coc")
     end,
   },
 }
