@@ -5,7 +5,7 @@ mkShell {
     clang
     clang-analyzer
     # sumneko-lua-language-server
-    # stylua
+    stylua
   ];
   shellHook = ''
     export CLANG=${pkgs.clang}/bin/clang
