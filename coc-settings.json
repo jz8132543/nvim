@@ -1,0 +1,7 @@
+{
+  "languageserver": {
+    "lua": {
+      "command": "lua-language-server",
+    }
+  }
+}

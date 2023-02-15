@@ -1,11 +1,11 @@
 with import <nixpkgs> { };
 mkShell {
   buildInputs = with pkgs; [
-    clang
     clang-tools
+    clang
     clang-analyzer
-    sumneko-lua-language-server
-    stylua
+    # sumneko-lua-language-server
+    # stylua
   ];
   shellHook = ''
     export CLANG=${pkgs.clang}/bin/clang

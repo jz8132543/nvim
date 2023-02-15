@@ -83,15 +83,15 @@ return {
             {
               "diff",
               symbols = { added = "+", modified = "~", removed = "-" },
-              -- symbols = { added = ' ', modified = ' ', removed = ' ' },
             },
+            { "b:coc_current_function" }
           },
           -- Right
           lualine_x = {
             -- { lsp_progress },
             {
               "diagnostics",
-              sources = { "nvim_diagnostic" },
+              sources = { "coc" },
               -- symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
               symbols = { error = " ", warn = " ", info = " ", hint = " " },
               -- symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
@@ -99,7 +99,7 @@ return {
           },
           lualine_y = {
             { "filetype" },
-            { lsp_client_names },
+            { "coc#status" },
           },
           lualine_z = {
             customLocation,
