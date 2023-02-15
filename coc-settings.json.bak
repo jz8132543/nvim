@@ -24,4 +24,23 @@
     "indent_style": "space",
     "indent_size": "2"
   },
+  "diagnostic-languageserver": {
+    "formatters": {
+      "stylua": {
+        "command": "stylua",
+        "args": [
+          "--color",
+          "Never",
+          "-"
+        ],
+        "rootPatterns": [
+          "stylua.toml",
+          ".stylua.toml"
+        ],
+      },
+    },
+    "formatFiletypes": {
+      "lua": "stylua",
+    },
+  },
 }
