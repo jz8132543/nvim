@@ -2,9 +2,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "tpope/vim-fugitive",
-    },
     config = function()
       local lsp = vim.lsp
       -- For mode, only show the first char (or first two chars to distinguish
@@ -35,11 +32,11 @@ return {
             },
           },
           lualine_c = {
-            {
-              "diff",
-              symbols = { added = "+", modified = "~", removed = "-" },
-            },
-            { "b:coc_symbol_line" },
+            -- {
+            --   "diff",
+            --   symbols = { added = "+", modified = "~", removed = "-" },
+            -- },
+            { "b:coc_current_function" },
           },
           -- Right
           lualine_x = {
