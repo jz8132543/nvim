@@ -19,10 +19,6 @@ return {
       { "<leader>cD", "<cmd>Telescope coc workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
       { "<leader>cs", "<cmd>Telescope coc document_symbols<cr>", desc = "Document Symbols" },
       { "<leader>cS", "<cmd>Telescope coc workspace_symbols<cr>", desc = "Workspace Symbols" },
-      { "gd", "<cmd>Telescope coc definitions<cr>", desc = "Definitions" },
-      { "gi", "<cmd>Telescope coc implementations<cr>", desc = "Implementations" },
-      { "gr", "<cmd>Telescope coc references<cr>", desc = "References" },
-      { "gt", "<cmd>Telescope coc type_definitions<cr>", desc = "Type Definitions" },
     },
     config = function()
       local actions = require("telescope.actions")

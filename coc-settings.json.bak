@@ -20,6 +20,7 @@
     "border": true
   },
   "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.format.enable": false,
   "diagnostic-languageserver": {
     "formatters": {
       "stylua": {

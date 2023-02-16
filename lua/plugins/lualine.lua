@@ -2,6 +2,9 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
     config = function()
       local lsp = vim.lsp
       -- For mode, only show the first char (or first two chars to distinguish
@@ -12,9 +15,10 @@ return {
 
       require("lualine").setup({
         options = {
+          theme = "catppuccin",
           icons_enabled = true,
-          component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
+          component_separators = '|',
+          section_separators = { left = '', right = '' },
           disabled_filetypes = {},
           always_divide_middle = true,
           globalstatus = true,
@@ -22,10 +26,7 @@ return {
         sections = {
           -- Left
           lualine_a = {
-            {
-              "mode",
-              fmt = simplifiedMode,
-            },
+            { 'mode',  fmt = simplifiedMode, separator = { left = '' }, right_padding = 2 },
           },
           lualine_b = {
             {
@@ -38,6 +39,7 @@ return {
               "diff",
               symbols = { added = "+", modified = "~", removed = "-" },
             },
+            { "b:coc_symbol_line" },
           },
           -- Right
           lualine_x = {
@@ -50,11 +52,10 @@ return {
             },
           },
           lualine_y = {
-            { "filetype" },
-            { "coc#status" },
+            { function() return vim.pesc(vim.g.coc_status or '') end },
           },
           lualine_z = {
-            { "location" },
+            { "bo:filetype", separator = { right = '' }, left_padding = 2 },
           },
         },
 
@@ -68,10 +69,12 @@ return {
         },
         tabline = {},
         extensions = {
-          -- "aerial",
-          -- "fugitive",
-          -- "man",
-          -- "quickfix",
+          "aerial",
+          "fugitive",
+          "man",
+          "quickfix",
+          "fzf",
+          "nvim-tree"
         },
       })
     end,

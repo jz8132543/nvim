@@ -10,20 +10,13 @@ return {
     end,
   },
 
-  -- better vim.ui
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
-
   -- bufferline
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     opts = {
       options = {
-        diagnostics = "nvim_lsp",
+        diagnostics = "coc",
         offsets = {
           {
             filetype = "NvimTree",
@@ -36,18 +29,34 @@ return {
     },
   },
 
-  -- indent guides for Neovim
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    config = {
-      char = "▏",
-      show_current_context_start = true,
-      show_current_context = true,
-      show_end_of_line = true,
-      buftype_exclude = { "terminal", "nofile" },
+    "petertriho/nvim-scrollbar",
+    event = "VeryLazy",
+    dependencies = {
+      "kevinhwang91/nvim-hlslens",
+      "lewis6991/gitsigns.nvim",
     },
+    config = function ()
+      require("scrollbar").setup()
+      require('hlslens').setup()
+      require("scrollbar.handlers.search").setup()
+      require('gitsigns').setup()
+      require("scrollbar.handlers.gitsigns").setup()
+    end,
   },
+
+  -- indent guides for Neovim
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   event = "BufReadPre",
+  --   config = {
+  --     char = "▏",
+  --     show_current_context_start = true,
+  --     show_current_context = true,
+  --     show_end_of_line = true,
+  --     buftype_exclude = { "terminal", "nofile" },
+  --   },
+  -- },
 
   -- noicer ui
   {
