@@ -1,12 +1,12 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     lazy = false,
     priority = 1000,
     config = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
+      require('catppuccin').setup({
+        flavour = 'mocha',
         integrations = {
           coc_nvim = true,
           gitsigns = true,
@@ -18,7 +18,7 @@ return {
           noice = true,
         },
       })
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme('catppuccin')
     end,
   },
 }

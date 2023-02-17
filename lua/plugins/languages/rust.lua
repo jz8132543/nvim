@@ -1,8 +1,8 @@
 return {
   {
-    "simrat39/rust-tools.nvim",
-    event = "VeryLazy",
-    ft = "rust",
+    'simrat39/rust-tools.nvim',
+    event = 'VeryLazy',
+    ft = 'rust',
     opts = {
       tools = {
         runnables = {
@@ -10,9 +10,9 @@ return {
         },
       },
       settings = {
-        ["rust-analyzer"] = {
+        ['rust-analyzer'] = {
           checkOnSave = {
-            command = "clippy",
+            command = 'clippy',
             allTargets = false,
           },
         },

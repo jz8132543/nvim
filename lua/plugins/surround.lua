@@ -1,43 +1,43 @@
 return {
   -- TODO: keymaps
   {
-    "kylechui/nvim-surround",
+    'kylechui/nvim-surround',
     keys = {
-      { "ys" },
-      { "yS" },
-      { "cs" },
-      { "cS" },
-      { "ds" },
-      { "dS" },
-      { "gs", mode = "x" },
-      { "gS", mode = "x" },
-      { "<C-g>", mode = "i" },
+      { 'ys' },
+      { 'yS' },
+      { 'cs' },
+      { 'cS' },
+      { 'ds' },
+      { 'dS' },
+      { 'gs', mode = 'x' },
+      { 'gS', mode = 'x' },
+      { '<C-g>', mode = 'i' },
     },
     config = function()
-      require("nvim-surround").setup({
+      require('nvim-surround').setup({
         keymaps = {
-          visual = "gs",
+          visual = 'gs',
         },
         surrounds = {
-          ["y"] = {
+          ['y'] = {
             add = function()
-              local result = require("nvim-surround.config").get_input("Enter the type name: ")
+              local result = require('nvim-surround.config').get_input('Enter the type name: ')
               if result then
-                return { { result .. "<" }, { ">" } }
+                return { { result .. '<' }, { '>' } }
               end
             end,
             find = function()
-              return require("nvim-surround.config").get_selection({
-                pattern = "[^=%s%(%)]+%b<>",
+              return require('nvim-surround.config').get_selection({
+                pattern = '[^=%s%(%)]+%b<>',
               })
             end,
-            delete = "^(.-<)().-(>)()$",
+            delete = '^(.-<)().-(>)()$',
             change = {
-              target = "^.-([%w_]+)()<.->()()$",
+              target = '^.-([%w_]+)()<.->()()$',
               replacement = function()
-                local result = require("nvim-surround.config").get_input("Enter new type replacement: ")
+                local result = require('nvim-surround.config').get_input('Enter new type replacement: ')
                 if result then
-                  return { { result }, { "" } }
+                  return { { result }, { '' } }
                 end
               end,
             },

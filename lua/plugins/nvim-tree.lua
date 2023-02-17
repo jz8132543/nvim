@@ -1,7 +1,7 @@
 return {
   {
-    "nvim-tree/nvim-tree.lua",
-    keys = { { "<leader>ft", "<cmd>NvimTreeFocus<cr>", desc = "NvimTree" } },
+    'nvim-tree/nvim-tree.lua',
+    keys = { { '<leader>ft', '<cmd>NvimTreeFocus<cr>', desc = 'NvimTree' } },
     config = {
       auto_reload_on_write = true,
       disable_netrw = false,
@@ -12,16 +12,16 @@ return {
       open_on_setup = false,
       open_on_setup_file = false,
       open_on_tab = false,
-      sort_by = "name",
+      sort_by = 'name',
       update_cwd = false,
       view = {
         width = 30,
         hide_root_folder = false,
-        side = "left",
+        side = 'left',
         preserve_window_proportions = false,
         number = false,
         relativenumber = false,
-        signcolumn = "yes",
+        signcolumn = 'yes',
         mappings = {
           custom_only = false,
           list = {
@@ -33,9 +33,9 @@ return {
         indent_markers = {
           enable = false,
           icons = {
-            corner = "└ ",
-            edge = "│ ",
-            none = "  ",
+            corner = '└ ',
+            edge = '│ ',
+            none = '  ',
           },
         },
         icons = {
@@ -53,17 +53,17 @@ return {
       },
       ignore_ft_on_setup = {},
       system_open = {
-        cmd = "",
+        cmd = '',
         args = {},
       },
       diagnostics = {
         enable = false,
         show_on_dirs = false,
         icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
+          hint = '',
+          info = '',
+          warning = '',
+          error = '',
         },
       },
       filters = {
@@ -88,16 +88,16 @@ return {
           resize_window = false,
           window_picker = {
             enable = true,
-            chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+            chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
             exclude = {
-              filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-              buftype = { "nofile", "terminal", "help" },
+              filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame' },
+              buftype = { 'nofile', 'terminal', 'help' },
             },
           },
         },
       },
       trash = {
-        cmd = "trash",
+        cmd = 'trash',
         require_confirm = true,
       },
       log = {

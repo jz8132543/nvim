@@ -1,28 +1,28 @@
 return {
   {
-    "vuki656/package-info.nvim",
-    event = "VeryLazy",
+    'vuki656/package-info.nvim',
+    event = 'VeryLazy',
     config = true,
     keys = {
       {
-        "<leader>ns",
+        '<leader>ns',
         "<cmd>lua require('package-info').show({ force = true })<cr>",
-        desc = "Display Latest Package Version",
+        desc = 'Display Latest Package Version',
       },
       {
-        "<leader>nd",
+        '<leader>nd',
         "<cmd>lua require('package-info').delete()<cr>",
-        desc = "Delete Dependency",
+        desc = 'Delete Dependency',
       },
       {
-        "<leader>ni",
+        '<leader>ni',
         "<cmd>lua require('package-info').install()<cr>",
-        desc = "Install Dependency",
+        desc = 'Install Dependency',
       },
       {
-        "<leader>np",
+        '<leader>np',
         "<cmd>lua require('package-info').change_version()<cr>",
-        desc = "Change Version",
+        desc = 'Change Version',
       },
     },
   },

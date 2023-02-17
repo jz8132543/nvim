@@ -6,14 +6,12 @@ mkShell {
   ];
   NIX_LD = lib.fileContents "${stdenv.cc}/nix-support/dynamic-linker";
   buildInputs = with pkgs; [
-    clang-tools
-    clang
-    clang-analyzer
-    sumneko-lua-language-server
-    stylua
+    sumneko-lua-language-server stylua
+    nodePackages.prettier
+    nodePackages.prettier-plugin-toml
+    treefmt pre-commit
   ];
   shellHook = ''
-    export CLANG=${pkgs.clang}/bin/clang
-    export CLANGD=${pkgs.clang-tools}/bin/clangd
+    export NODE_PATH=${nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH
   '';
 }

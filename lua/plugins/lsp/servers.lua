@@ -1,23 +1,64 @@
 return {
+  -- TODO
   {
-    "iamcco/coc-diagnostic",
-    event = "VeryLazy",
-    build = "yarn install --frozen-lockfile",
+    'puremourning/vimspector',
+    event = 'VeryLazy',
   },
   {
-    "xiyaowong/coc-sumneko-lua",
-    build = "yarn install --frozen-lockfile",
-    ft = "lua",
+    'neoclide/coc-git',
+    event = 'VeryLazy',
+    build = 'yarn install --frozen-lockfile',
   },
   {
-    "neoclide/coc-json",
-    build = "yarn install --frozen-lockfile",
-    ft = "json",
+    'iamcco/coc-diagnostic',
+    lazy = false,
+    -- event = 'VeryLazy',
+    build = 'yarn install --frozen-lockfile',
   },
   {
-    "fannheyward/coc-rust-analyzer",
-    build = "yarn install --frozen-lockfile",
-    ft = "rust",
+    'xiyaowong/coc-sumneko-lua',
+    build = 'yarn install --frozen-lockfile',
+    ft = 'lua',
   },
-
+  {
+    'neoclide/coc-json',
+    build = 'yarn install --frozen-lockfile',
+    ft = 'json',
+  },
+  {
+    'kkiyama117/coc-toml',
+    build = 'yarn install --frozen-lockfile',
+    ft = 'toml',
+  },
+  {
+    'neoclide/coc-prettier',
+    build = 'yarn install --frozen-lockfile',
+    ft = {
+      'javascript',
+      'typescript',
+      'flow',
+      'jsx',
+      'json',
+      'css',
+      'scss',
+      'less',
+      'html',
+      'vue',
+      'ember',
+      'glimmer',
+      'graphql',
+      'markdown',
+      'yaml',
+    },
+  },
+  {
+    'kkiyama117/coc-toml',
+    build = 'yarn install --frozen-lockfile',
+    ft = 'toml',
+  },
+  {
+    'fannheyward/coc-rust-analyzer',
+    build = 'yarn install --frozen-lockfile',
+    ft = 'rust',
+  },
 }

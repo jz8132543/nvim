@@ -1,10 +1,10 @@
 return {
   -- better vim.notify
   {
-    "rcarriga/nvim-notify",
+    'rcarriga/nvim-notify',
     init = function()
       vim.notify = function(...)
-        vim.notify = require("notify")
+        vim.notify = require('notify')
         return vim.notify(...)
       end
     end,
@@ -12,17 +12,17 @@ return {
 
   -- bufferline
   {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
+    'akinsho/bufferline.nvim',
+    event = 'VeryLazy',
     opts = {
       options = {
-        diagnostics = "coc",
+        diagnostics = 'coc',
         offsets = {
           {
-            filetype = "NvimTree",
-            text = "File Explorer",
-            highlight = "Directory",
-            text_align = "left",
+            filetype = 'NvimTree',
+            text = 'File Explorer',
+            highlight = 'Directory',
+            text_align = 'left',
           },
         },
       },
@@ -30,38 +30,56 @@ return {
   },
 
   {
-    "petertriho/nvim-scrollbar",
-    event = "VeryLazy",
+    'petertriho/nvim-scrollbar',
+    event = 'VeryLazy',
     dependencies = {
-      "kevinhwang91/nvim-hlslens",
-      "lewis6991/gitsigns.nvim",
+      'kevinhwang91/nvim-hlslens',
+      'lewis6991/gitsigns.nvim',
     },
-    config = function ()
-      require("scrollbar").setup()
+    config = function()
+      require('scrollbar').setup()
       require('hlslens').setup()
-      require("scrollbar.handlers.search").setup()
+      require('scrollbar.handlers.search').setup()
       require('gitsigns').setup()
-      require("scrollbar.handlers.gitsigns").setup()
+      require('scrollbar.handlers.gitsigns').setup()
     end,
   },
 
+  -- cursorline
+  {
+    'yamatsum/nvim-cursorline',
+    event = 'VeryLazy',
+    opts = {
+      cursorline = {
+        enable = true,
+        timeout = 1000,
+        number = false,
+      },
+      cursorword = {
+        enable = true,
+        min_length = 3,
+        hl = { underline = true },
+      },
+    },
+  },
+
   -- indent guides for Neovim
-  -- {
-  --   "lukas-reineke/indent-blankline.nvim",
-  --   event = "BufReadPre",
-  --   config = {
-  --     char = "▏",
-  --     show_current_context_start = true,
-  --     show_current_context = true,
-  --     show_end_of_line = true,
-  --     buftype_exclude = { "terminal", "nofile" },
-  --   },
-  -- },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPre',
+    config = {
+      char = '▏',
+      -- show_current_context_start = true,
+      -- show_current_context = true,
+      show_end_of_line = true,
+      -- buftype_exclude = { "terminal", "nofile" },
+    },
+  },
 
   -- noicer ui
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
+    'folke/noice.nvim',
+    event = 'VeryLazy',
     opts = {
       lsp = {
         progress = {
@@ -82,41 +100,41 @@ return {
 
   -- dashboard
   {
-    "goolord/alpha-nvim",
+    'goolord/alpha-nvim',
     lazy = false,
     config = function()
-      local dashboard = require("alpha.themes.dashboard")
+      local dashboard = require('alpha.themes.dashboard')
       dashboard.section.buttons.val = {
-        dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
-        dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-        dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
-        dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-        dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
-        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        dashboard.button('f', ' ' .. ' Find file', ':Telescope find_files <CR>'),
+        dashboard.button('n', ' ' .. ' New file', ':ene <BAR> startinsert <CR>'),
+        dashboard.button('r', ' ' .. ' Recent files', ':Telescope oldfiles <CR>'),
+        dashboard.button('g', ' ' .. ' Find text', ':Telescope live_grep <CR>'),
+        dashboard.button('c', ' ' .. ' Config', ':e $MYVIMRC <CR>'),
+        dashboard.button('l', '鈴' .. ' Lazy', ':Lazy<CR>'),
+        dashboard.button('q', ' ' .. ' Quit', ':qa<CR>'),
       }
       for _, button in ipairs(dashboard.section.buttons.val) do
-        button.opts.hl = "AlphaButtons"
-        button.opts.hl_shortcut = "AlphaShortcut"
+        button.opts.hl = 'AlphaButtons'
+        button.opts.hl_shortcut = 'AlphaShortcut'
       end
-      dashboard.section.footer.opts.hl = "Type"
-      dashboard.section.header.opts.hl = "AlphaHeader"
-      dashboard.section.buttons.opts.hl = "AlphaButtons"
+      dashboard.section.footer.opts.hl = 'Type'
+      dashboard.section.header.opts.hl = 'AlphaHeader'
+      dashboard.section.buttons.opts.hl = 'AlphaButtons'
       dashboard.opts.layout[1].val = 8
 
-      if vim.bo[0].filetype == "lazy" then
-        vim.notify("Missing plugins installed!", vim.log.levels.INFO, { title = "LazyVim" })
+      if vim.bo[0].filetype == 'lazy' then
+        vim.notify('Missing plugins installed!', vim.log.levels.INFO, { title = 'LazyVim' })
         vim.cmd.close()
       end
 
-      require("alpha").setup(dashboard.opts)
+      require('alpha').setup(dashboard.opts)
 
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "LazyVimStarted",
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'LazyVimStarted',
         callback = function()
-          local stats = require("lazy").stats()
+          local stats = require('lazy').stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-          dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+          dashboard.section.footer.val = '⚡ Neovim loaded ' .. stats.count .. ' plugins in ' .. ms .. 'ms'
           pcall(vim.cmd.AlphaRedraw)
         end,
       })

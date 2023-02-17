@@ -2,13 +2,34 @@
   "coc.preferences": {
     "formatOnSave": true,
     "formatOnType": true,
-    "currentFunctionSymbolAutoUpdate": true,
+    "currentFunctionSymbolAutoUpdate": true
   },
   "suggest.noselect": true,
-  "codeLens.enable": true,
+  "semanticTokens": {
+    "enable": true,
+    "filetypes": ["*"]
+  },
+  "codeLens": {
+    "enable": true,
+    "separator": " ",
+    "subseparator": " | ",
+    "position": "eol"
+  },
+  "inlayHint": {
+    "typeSeparator": "‣ ",
+    "parameterSeparator": "‣ "
+  },
   "diagnostic": {
     "virtualText": true,
     "refreshOnInsertMode": true,
+    "errorSign": "✗",
+    "format": "%source%code: %message",
+    "hintSign": "",
+    "infoSign": ""
+  },
+  "git": {
+    "showCommitInFloating": true,
+    "virtualTextPrefix": ""
   },
   "git.floatConfig": {
     "border": true
@@ -22,18 +43,149 @@
   "hover.floatConfig": {
     "border": true
   },
+  "sumneko-lua.enableNvimLuaDev": true,
+  "Lua": {
+    "hint.enable": true,
+    "telemetry.enable": true,
+    "diagnostics.disable": ["undefined-global"],
+    "completion.callSnippet": "Replace",
+    "runtime.version": "LuaJIT"
+  },
+  "rust-analyzer": {
+    "checkOnSave.command": "clippy",
+    "procMacro.enable": true
+  },
+  "pyright.organizeimports.provider": "isort",
+  "python": {
+    "linting.flake8Enabled": true,
+    "linting.mypyEnabled": true,
+    "formatting.provider": "black",
+    "analysis.diagnosticSeverityOverrides": {
+      "reportDuplicateImport": "information",
+      "reportUnusedCallResult": "information",
+      "reportUnusedClass": "information",
+      "reportUnusedFunction": "information",
+      "reportUnusedImport": "information",
+      "reportUnusedVariable": "information"
+    }
+  },
+  "go.goplsOptions": {
+    "experimentalPostfixCompletions": false,
+    "gofumpt": true,
+    "semanticTokens": true,
+    "staticcheck": true,
+    "usePlaceholders": true,
+    "codelenses": {
+      "generate": true,
+      "tidy": true,
+      "upgrade_dependency": true
+    }
+  },
+  "diagnostic-languageserver": {
+    "mergeConfig": true,
+    "formatFiletypes": {
+      "fish": "fish_indent",
+      "hcl": "hclfmt",
+      "lua": ["stylua", "lua-format"],
+      "nim": "nimpretty",
+      "python": ["isort", "black"],
+      "sh": "shfmt",
+      "sql": "pg_format"
+    },
+    "filetypes": {
+      "dockerfile": "hadolint",
+      "go": "golangci-lint",
+      "lua": ["selene", "luacheck"],
+      "markdown": ["markdownlint"],
+      "python": ["pylint"],
+      "sh": "shellcheck",
+      "vim": "vint",
+      "yaml": "yamllint"
+    },
+    "formatters": {
+      "black": {
+        "rootPatterns": ["pyproject.toml"]
+      },
+      "hclfmt": {
+        "command": "hclfmt"
+      },
+      "lua-format": {
+        "requiredFiles": [".lua-format"],
+        "rootPatterns": [".lua-format"]
+      },
+      "nimpretty": {
+        "command": "nimpretty",
+        "args": ["--out:/dev/stdout", "%tempfile"]
+      },
+      "pg_format": {
+        "command": "pg_format",
+        "args": ["-B", "-L"]
+      },
+      "stylua": {
+        "command": "stylua",
+        "args": ["-"],
+        "rootPatterns": ["stylua.toml"],
+        "requiredFiles": ["stylua.toml", ".stylua.toml"]
+      }
+    },
+    "linters": {
+      "mypy": {
+        "args": [
+          "--follow-imports=silent",
+          "--hide-error-codes",
+          "--hide-error-context",
+          "--no-color-output",
+          "--no-error-summary",
+          "--no-pretty",
+          "--show-column-numbers",
+          "%file"
+        ]
+      },
+      "pylint": {
+        "rootPatterns": [
+          "pylintrc",
+          ".pylintrc",
+          "pyproject.toml",
+          "setup.cfg",
+          ".git"
+        ]
+      },
+      "selene": {
+        "command": "selene",
+        "args": ["--display-style", "quiet", "-"],
+        "sourceName": "selene",
+        "formatPattern": [
+          "^[^:]+:(\\d+):(\\d+):\\s(\\w+)\\[\\w+\\]:\\s(.*)$",
+          {
+            "line": 1,
+            "column": 2,
+            "endLine": 1,
+            "endColumn": 2,
+            "security": 3,
+            "message": 4
+          }
+        ],
+        "rootPatterns": ["selene.toml"],
+        "requiredFiles": ["selene.toml"],
+        "debounce": 100,
+        "securities": {
+          "error": "error",
+          "warning": "warning"
+        }
+      },
+      "shellcheck": {
+        "args": ["--format", "json1", "--external-sources", "-"]
+      }
+    }
+  },
   "languageserver": {
     "nix": {
       "command": "nil",
-      "filetypes": [
-        "nix"
-      ],
-      "rootPatterns": [
-        ".git"
-      ],
+      "filetypes": ["nix"],
+      "rootPatterns": [".git"],
       "settings.nil": {
-        "formatting.command": "nixpkgs-fmt",
-      },
-    },
-  },
+        "formatting.command": "nixpkgs-fmt"
+      }
+    }
+  }
 }
