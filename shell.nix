@@ -6,10 +6,13 @@ mkShell {
   ];
   NIX_LD = lib.fileContents "${stdenv.cc}/nix-support/dynamic-linker";
   buildInputs = with pkgs; [
-    sumneko-lua-language-server stylua
+    sumneko-lua-language-server
+    stylua
     nodePackages.prettier
     nodePackages.prettier-plugin-toml
-    treefmt pre-commit
+    treefmt
+    lefthook
+    conform
   ];
   shellHook = ''
     export NODE_PATH=${nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH

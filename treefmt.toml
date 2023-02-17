@@ -19,3 +19,7 @@ options = ["--plugin", "prettier-plugin-toml", "--write"]
 command = "stylua"
 includes = ["*.lua"]
 options = ["-"]
+
+[formatter.nix]
+command = "nixpkgs-fmt"
+includes = ["*.nix"]

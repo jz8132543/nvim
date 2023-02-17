@@ -1,0 +1,17 @@
+policies:
+  - type: commit
+    spec:
+      conventional:
+        types:
+          - build
+          - chore
+          - ci
+          - docs
+          - feat
+          - fix
+          - perf
+          - refactor
+          - style
+          - test
+      header:
+        length: 89
