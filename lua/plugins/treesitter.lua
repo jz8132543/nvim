@@ -14,19 +14,8 @@ return {
     config = function()
       require("nvim-treesitter.configs").setup({
         sync_install = false,
-        auto_install = true,
-        ensure_installed = {
-          "json",
-          "lua",
-          "markdown",
-          "markdown_inline",
-          "python",
-          "regex",
-          "tsx",
-          "typescript",
-          "vim",
-          "yaml",
-        },
+        auto_install = false,
+        ensure_installed = {},
         highlight = { enable = true },
         indent = { enable = true },
         context_commentstring = { enable = true, enable_autocmd = true },

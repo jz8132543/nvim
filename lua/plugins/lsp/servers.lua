@@ -38,6 +38,14 @@ local servers = {
         workspace = {
           checkThirdParty = false,
         },
+	hint = {
+          enable = true,
+          setType = true,
+          arrayIndex = "Disable",
+        },
+        codelens = {
+          enable = true,
+        },
         completion = {
           callSnippet = "Replace",
         },

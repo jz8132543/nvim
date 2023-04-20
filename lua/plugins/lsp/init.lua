@@ -29,14 +29,22 @@ return {
         update_in_insert = true,
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
+	      float = {
+          boader = "rounded",
+        },
       })
 
       -- lspconfig
+      local handlers = {
+         ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+         ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+       }
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
       -- capabilities.offsetEncoding = "utf-8"
       for server, opts in pairs(servers) do
         opts.capabilities = capabilities
         opts.on_attach = on_attach
+	opts.handlers = handlers
         require("lspconfig")[server].setup(opts)
       end
     end,

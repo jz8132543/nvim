@@ -24,9 +24,11 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-omni",
     },
 
     config = function()
+      vim.cmd('set completeopt=menu,menuone,noselect')
       local cmp = require("cmp")
       cmp.setup({
         snippet = {
@@ -51,6 +53,7 @@ return {
           { name = "nvim_lsp" },
           { name = "nvim_lsp_document_symbol" },
           { name = "nvim_lsp_signature_help" },
+          { name = "omni" },
         }),
         formatting = {
           format = require("lspkind").cmp_format({
