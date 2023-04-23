@@ -1,6 +1,8 @@
 local servers = require("plugins.lsp.servers")
 
 local function on_attach(client, bufnr)
+  -- Enable formatting for ranges
+  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   require("plugins.lsp.format").on_attach(client, bufnr)
   require("plugins.lsp.keymaps").on_attach(client, bufnr)
 end
@@ -20,31 +22,14 @@ return {
     },
     config = function()
       -- diagnostics
-      for name, icon in pairs(require("config.icons").diagnostics) do
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
-      vim.diagnostic.config({
-        underline = true,
-        update_in_insert = true,
-        virtual_text = { spacing = 4, prefix = "●" },
-        severity_sort = true,
-	      float = {
-          boader = "rounded",
-        },
-      })
+      local diagnostics = require("plugins.lsp.diagnostics")
+      diagnostics.apply()
 
       -- lspconfig
-      local handlers = {
-         ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-         ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-       }
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-      -- capabilities.offsetEncoding = "utf-8"
       for server, opts in pairs(servers) do
         opts.capabilities = capabilities
         opts.on_attach = on_attach
-	opts.handlers = handlers
         require("lspconfig")[server].setup(opts)
       end
     end,
@@ -61,7 +46,7 @@ return {
         save_after_format = false,
         sources = {
           nls.builtins.formatting.stylua,
-          nls.builtins.formatting.nixpkgs_fmt,
+          -- nls.builtins.formatting.nixpkgs_fmt,
           --         nls.builtins.formatting.clang_format,
           --         nls.builtins.formatting.cmake_format,
           --         nls.builtins.formatting.shfmt,

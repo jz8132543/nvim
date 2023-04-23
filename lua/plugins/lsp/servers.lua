@@ -1,24 +1,20 @@
 -- Add any servers here together with their settings
----@type lspconfig.options
+-- @type lspconfig.options
 local servers = {
   bashls = {},
-  clangd = {},
   cmake = {},
   cssls = {},
   tsserver = {},
   html = {},
   jsonls = {},
   yamlls = {},
-  rust_analyzer = {
-    diagnostics = { experimental = { enable = true } },
-    check = {
-      command = "clippy",
-      allTargets = false,
-    },
-  },
   nil_ls = {
-    formatting = {
-      command = { "nixpkgs-fmt" },
+    settings = {
+      ["nil"] = {
+        formatting = {
+          command = { "nixpkgs-fmt" },
+        },
+      },
     },
   },
   pylsp = {
@@ -38,7 +34,7 @@ local servers = {
         workspace = {
           checkThirdParty = false,
         },
-	hint = {
+        hint = {
           enable = true,
           setType = true,
           arrayIndex = "Disable",
