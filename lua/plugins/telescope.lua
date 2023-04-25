@@ -7,12 +7,13 @@ return {
       "nvim-telescope/telescope-file-browser.nvim",
     },
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find in Files (Grep)" },
-      { "<leader>fl", "<cmd>Telescope lazy<cr>", desc = "Lazy Files" },
-      { "<leader>fb", "<cmd>Telescope file_browser<cr>", desc = "Lazy Browser" },
+      { "<leader>tf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>tr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>tb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>tg", "<cmd>Telescope live_grep<cr>", desc = "Find in Files (Grep)" },
+      { "<leader>td", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+      { "<leader>tl", "<cmd>Telescope lazy<cr>", desc = "Lazy Files" },
+      { "<leader>tb", "<cmd>Telescope file_browser<cr>", desc = "Lazy Browser" },
     },
     config = function()
       local actions = require("telescope.actions")

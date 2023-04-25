@@ -28,8 +28,10 @@ return {
     },
 
     config = function()
-      vim.cmd('set completeopt=menu,menuone,noselect')
+      vim.cmd("set completeopt=menu,menuone,noselect")
       local cmp = require("cmp")
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -55,19 +57,45 @@ return {
           { name = "nvim_lsp_signature_help" },
           { name = "omni" },
         }),
-        formatting = {
-          format = require("lspkind").cmp_format({
-            mode = "symbol_text",
-            maxwidth = 50,
-            menu = {
-              nvim_lsp = "[LSP]",
-              buffer = "[Buf]",
-              path = "[Path]",
-              luasnip = "[Snip]",
-              nvim_lua = "[Lua]",
-            },
-          }),
+        window = {
+          completion = {
+            border = "rounded",
+          },
+          documentation = {
+            border = "rounded",
+          },
+          experimental = {
+            ghost_text = true,
+            native_menu = true,
+          },
         },
+        formatting = {
+          -- format = require("lspkind").cmp_format({
+          --   mode = "symbol_text",
+          --   maxwidth = 50,
+          --   menu = {
+          --     nvim_lsp = "[LSP]",
+          --     buffer = "[Buf]",
+          --     path = "[Path]",
+          --     luasnip = "[Snip]",
+          --     nvim_lua = "[Lua]",
+          --   },
+          -- }),
+          format = require("lspkind").cmp_format(),
+        },
+      })
+
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
       })
     end,
   },

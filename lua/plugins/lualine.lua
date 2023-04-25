@@ -1,72 +1,68 @@
+local function lsp_list()
+  local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local buf_client_names = {}
+
+  for _, client in pairs(buf_clients) do
+    if client.name ~= "null-ls" then
+      table.insert(buf_client_names, client.name)
+    end
+  end
+
+  return table.concat(buf_client_names, ", ")
+end
+
+local function formatters_list()
+  local formatters = require("plugins.lsp.format")
+
+  local buf_ft = vim.bo.filetype
+  local supported_formatters = formatters.list_registered(buf_ft)
+  return table.concat(supported_formatters, ", ")
+end
+
+local lsp_client = function()
+  local lsp = lsp_list()
+  -- local text = " LSP:"
+  local text = ""
+  if lsp == "" then
+    text = "%#WinSeparator#" .. text .. "%*"
+  end
+  return vim.trim(vim.fn.join({ text, lsp }, " "))
+end
+
+local formatters = function()
+  local formatters = formatters_list()
+  -- local text = " Format:"
+  local text = ""
+  if formatters == "" then
+    text = "%#WinSeparator#" .. text .. "%*"
+  end
+  return vim.trim(vim.fn.join({ text, formatters }, " "))
+end
+
+local function simplifiedMode(str)
+  return " " .. (str == "V-LINE" and "VL" or (str == "V-BLOCK" and "VB" or str:sub(1, 1)))
+end
+
+local function customLocation()
+  return "%3l/%-3L:%-2v [%3p%%]"
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     config = function()
-      local lsp = vim.lsp
-      -- For mode, only show the first char (or first two chars to distinguish
-      -- different VISUALs) plus a fancy icon
-      local function simplifiedMode(str)
-        return " " .. (str == "V-LINE" and "VL" or (str == "V-BLOCK" and "VB" or str:sub(1, 1)))
-      end
-
-      -- For filename, show the filename and the filesize
-      local function fileNameAndSize(str)
-        -- For doc, only show filename
-        if string.find(str, ".*/doc/.*%.txt") then
-          str = vim.fn.expand("%:t")
-        end
-        local size = require("lualine.components.filesize")()
-        return size == "" and str or str .. " [" .. size .. "]"
-      end
-
-      -- Customized location
-      local function customLocation()
-        return "%3l/%-3L:%-2v [%3p%%]"
-      end
-
-      -- Output LSP progress
-      local function lsp_progress()
-        local messages = lsp.util.get_progress_messages()[1]
-        if not messages then
-          return ""
-        end
-        local name = messages.name or ""
-        local msg = messages.message or ""
-        local percentage = messages.percentage or 0
-        local title = messages.title or ""
-        local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        local ms = vim.loop.hrtime() / 1000000
-        local frame = math.floor(ms / 120) % #spinners
-        return string.format(" %%<%s %s: %s %s (%s%%%%) ", spinners[frame + 1], name, title, msg, percentage)
-      end
-
-      -- Output the LSP client names attached to the current buffer
-      local function lsp_client_names()
-        local bufnr = vim.api.nvim_get_current_buf()
-        local clients = lsp.get_active_clients({ bufnr = bufnr })
-        local client_names = {}
-        local msg = "None"
-        if #clients > 0 then
-          for _, client in pairs(clients) do
-            client_names[#client_names + 1] = client.name
-          end
-          msg = table.concat(client_names, "·")
-        end
-        return msg
-      end
-
       require("lualine").setup({
         options = {
           icons_enabled = true,
-          component_separators = { left = "", right = "" },
+          -- component_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {},
           always_divide_middle = true,
           globalstatus = true,
         },
         sections = {
-          -- Left
           lualine_a = {
             {
               "mode",
@@ -83,23 +79,19 @@ return {
             {
               "diff",
               symbols = { added = "+", modified = "~", removed = "-" },
-              -- symbols = { added = ' ', modified = ' ', removed = ' ' },
             },
           },
-          -- Right
           lualine_x = {
-            -- { lsp_progress },
+            { lsp_client },
+            { formatters },
             {
               "diagnostics",
               sources = { "nvim_diagnostic" },
-              -- symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" },
               symbols = { error = " ", warn = " ", info = " ", hint = " " },
-              -- symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
             },
           },
           lualine_y = {
             { "filetype" },
-            { lsp_client_names },
           },
           lualine_z = {
             customLocation,

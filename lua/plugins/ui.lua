@@ -1,15 +1,4 @@
 return {
-  -- better vim.notify
-  {
-    "rcarriga/nvim-notify",
-    init = function()
-      vim.notify = function(...)
-        vim.notify = require("notify")
-        return vim.notify(...)
-      end
-    end,
-  },
-
   -- better vim.ui
   {
     "stevearc/dressing.nvim",
@@ -23,15 +12,33 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        diagnostics = "nvim_lsp",
-        offsets = {
-          {
-            filetype = "NvimTree",
-            text = "File Explorer",
-            highlight = "Directory",
-            text_align = "left",
-          },
+        mode = "buffers",
+        numbers = "none",
+        close_command = "bdelete! %d",
+        indicator = {
+          icon = "▎",
+          style = "icon",
         },
+        buffer_close_icon = "",
+        modified_icon = "●",
+        close_icon = "",
+        left_trunc_marker = "",
+        right_trunc_marker = "",
+        max_name_length = 18,
+        max_prefix_length = 15,
+        tab_size = 18,
+        diagnostics = false,
+        offsets = { { filetype = "NvimTree", text = "File Explorer" } },
+        color_icons = true,
+        show_buffer_icons = true,
+        show_buffer_close_icons = true,
+        show_buffer_default_icon = true,
+        show_close_icon = true,
+        show_tab_indicators = true,
+        persist_buffer_sort = true,
+        separator_style = "thick",
+        enforce_regular_tabs = true,
+        always_show_bufferline = true,
       },
     },
   },
@@ -42,43 +49,19 @@ return {
     event = "BufReadPre",
     config = {
       char = "▏",
-      show_current_context_start = true,
-      show_current_context = true,
       show_end_of_line = true,
       buftype_exclude = { "terminal", "nofile" },
     },
   },
 
-  -- noicer ui
+  -- Lsp process
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        progress = {
-          enabled = true,
-        },
-        -- override = {
-        --   ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        --   ["vim.lsp.util.stylize_markdown"] = true,
-        -- },
-      },
-      presets = {
-        bottom_search = true,
-        command_palette = true,
-        long_message_to_split = true,
-      },
-    },
-  },
-
-  -- Symboles
-  {
-    "simrat39/symbols-outline.nvim",
-    event = "VeryLazy",
-    config = true,
-    keys = {
-      { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols" },
-    },
+    "j-hui/fidget.nvim",
+    event = "LspAttach",
+    enabled = true,
+    config = function()
+      require("fidget").setup()
+    end,
   },
 
   -- dashboard
