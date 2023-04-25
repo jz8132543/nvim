@@ -3,6 +3,7 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = {
+      "nvim-lua/plenary.nvim",
       "tsakirist/telescope-lazy.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
     },

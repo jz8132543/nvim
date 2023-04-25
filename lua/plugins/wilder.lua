@@ -1,6 +1,6 @@
 return {
-  {
-    "gelguy/wilder.nvim",
-    opts = true,
-  },
+  -- {
+  --   "gelguy/wilder.nvim",
+  --   opts = true,
+  -- },
 }

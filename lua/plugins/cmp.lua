@@ -70,18 +70,17 @@ return {
           },
         },
         formatting = {
-          -- format = require("lspkind").cmp_format({
-          --   mode = "symbol_text",
-          --   maxwidth = 50,
-          --   menu = {
-          --     nvim_lsp = "[LSP]",
-          --     buffer = "[Buf]",
-          --     path = "[Path]",
-          --     luasnip = "[Snip]",
-          --     nvim_lua = "[Lua]",
-          --   },
-          -- }),
-          format = require("lspkind").cmp_format(),
+          format = require("lspkind").cmp_format({
+            mode = "symbol_text",
+            maxwidth = 50,
+            menu = {
+              nvim_lsp = "[LSP]",
+              buffer = "[Buf]",
+              path = "[Path]",
+              luasnip = "[Snip]",
+              nvim_lua = "[Lua]",
+            },
+          }),
         },
       })
 

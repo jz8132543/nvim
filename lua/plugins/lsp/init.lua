@@ -73,12 +73,17 @@ return {
     end,
   },
 
-  -- UI
+  -- Winbar
   {
-    "glepnir/lspsaga.nvim",
-    event = "LspAttach",
-    opts = true,
+    "utilyre/barbecue.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = true,
   },
+  -- UI
   {
     "dnlhc/glance.nvim",
     event = "BufRead",

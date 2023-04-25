@@ -7,9 +7,15 @@ return {
     config = function()
       require("catppuccin").setup({
         flavour = "mocha",
+        dim_inactive = {
+          enabled = true,
+          shade = "dark",
+          percentage = 0.15,
+        },
+        term_colors = false,
+        transparent_background = false,
         integrations = {
           treesitter = true,
-
           native_lsp = {
             enabled = true,
             underlines = {
