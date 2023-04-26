@@ -8,6 +8,7 @@ local servers = {
   html = {},
   jsonls = {},
   yamlls = {},
+  taplo = {},
   nil_ls = {
     settings = {
       ["nil"] = {

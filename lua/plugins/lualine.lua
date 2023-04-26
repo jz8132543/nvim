@@ -43,10 +43,6 @@ local function simplifiedMode(str)
   return " " .. (str == "V-LINE" and "VL" or (str == "V-BLOCK" and "VB" or str:sub(1, 1)))
 end
 
-local function customLocation()
-  return "%3l/%-3L:%-2v [%3p%%]"
-end
-
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -57,7 +53,7 @@ return {
           icons_enabled = true,
           -- component_separators = { left = "", right = "" },
           component_separators = { left = "", right = "" },
-          section_separators = { left = "", right = "" },
+          -- section_separators = { left = "", right = "" },
           disabled_filetypes = {},
           always_divide_middle = true,
           globalstatus = true,
@@ -77,25 +73,17 @@ return {
           },
           lualine_c = {
             {
-              "diff",
-              symbols = { added = "+", modified = "~", removed = "-" },
-            },
-          },
-          lualine_x = {
-            { lsp_client },
-            { formatters },
-            {
               "diagnostics",
               sources = { "nvim_diagnostic" },
               symbols = { error = " ", warn = " ", info = " ", hint = " " },
             },
           },
-          lualine_y = {
-            { "filetype" },
+          lualine_x = {
+            { lsp_client },
+            { formatters },
           },
-          lualine_z = {
-            customLocation,
-          },
+          lualine_y = { "filetype" },
+          lualine_z = { "os.date('%H:%M')" },
         },
 
         inactive_sections = {

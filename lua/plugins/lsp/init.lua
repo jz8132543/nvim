@@ -4,7 +4,6 @@ local function on_attach(client, bufnr)
   -- Enable formatting for ranges
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   require("plugins.lsp.format").on_attach(client, bufnr)
-  require("plugins.lsp.keymaps").on_attach(client, bufnr)
 end
 
 return {
@@ -41,11 +40,13 @@ return {
     event = "VeryLazy",
     config = function()
       local nls = require("null-ls")
+      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
       nls.setup({
         debounce = 150,
         save_after_format = false,
         sources = {
           nls.builtins.formatting.stylua,
+          nls.builtins.formatting.rustfmt,
           -- nls.builtins.formatting.nixpkgs_fmt,
           --         nls.builtins.formatting.clang_format,
           --         nls.builtins.formatting.cmake_format,
@@ -69,6 +70,18 @@ return {
           --         -- nls.builtins.diagnostics.flake8,
         },
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
+        on_attach = function(client, bufnr)
+          if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format()
+              end,
+            })
+          end
+        end,
       })
     end,
   },
