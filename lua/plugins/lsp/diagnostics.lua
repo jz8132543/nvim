@@ -32,12 +32,7 @@ local config = {
     source = false,
     format = format_diagnostic,
   },
-  -- float = {
-  --   source = true,
-  --   focusable = true,
-  --   style = "minimun",
-  --   border = "rounded",
-  -- },
+  float = false,
   virtual_text = {
     prefix = "",
     spacing = 2,
