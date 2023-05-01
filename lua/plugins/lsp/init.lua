@@ -1,12 +1,20 @@
 local servers = require("plugins.lsp.servers")
+M = {}
 
-local function on_attach(client, bufnr)
+M.on_attach = function(client, bufnr)
   -- Enable formatting for ranges
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+  -- Lsp signature
+  require("lsp_signature").on_attach({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "rounded",
+    },
+  }, bufnr)
   require("plugins.lsp.format").on_attach(client, bufnr)
 end
 
-return {
+M.init = {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -18,6 +26,7 @@ return {
       { "williamboman/mason-lspconfig.nvim", config = true },
       { "WhoIsSethDaniel/mason-tool-installer.nvim", config = true },
       "hrsh7th/cmp-nvim-lsp",
+      "ray-x/lsp_signature.nvim",
     },
     config = function()
       -- diagnostics
@@ -28,7 +37,7 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
       for server, opts in pairs(servers) do
         opts.capabilities = capabilities
-        opts.on_attach = on_attach
+        opts.on_attach = require("plugins.lsp.utils").on_attach
         require("lspconfig")[server].setup(opts)
       end
     end,
@@ -116,3 +125,5 @@ return {
     },
   },
 }
+
+return M.init

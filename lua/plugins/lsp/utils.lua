@@ -23,20 +23,6 @@ function M.format()
   })
 end
 
-function M.on_attach(client, buf)
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = vim.api.nvim_create_augroup("LspFormat", {}),
-      buffer = buf,
-      callback = function()
-        if M.autoformat then
-          M.format()
-        end
-      end,
-    })
-  end
-end
-
 function M.list_registered_providers_names(filetype)
   local available_sources = require("null-ls.sources").get_available(filetype)
   local registered = {}
@@ -52,6 +38,29 @@ end
 function M.list_registered(filetype)
   local registered_providers = M.list_registered_providers_names(filetype)
   return registered_providers[require("null-ls").methods.FORMATTING] or {}
+end
+
+function M.on_attach(client, bufnr)
+  -- Enable formatting for ranges
+  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+  -- Lsp signature
+  require("lsp_signature").on_attach({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "rounded",
+    },
+  }, bufnr)
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("LspFormat", {}),
+      buffer = bufnr,
+      callback = function()
+        if M.autoformat then
+          M.format()
+        end
+      end,
+    })
+  end
 end
 
 return M

@@ -25,6 +25,10 @@ return {
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-omni",
+      "lukas-reineke/cmp-rg",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-calc",
+      "petertriho/cmp-git",
     },
 
     config = function()
@@ -48,15 +52,40 @@ return {
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
         }),
-        sources = cmp.config.sources({
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-          { name = "nvim_lsp" },
+        sources = {
+          { name = "luasnip", priority = 70, max_item_count = 8 },
+          { name = "rg", priority = 65, max_item_count = 4 },
+          { name = "buffer", priority = 60, max_item_count = 4 },
+          { name = "nvim_lua", priority = 55, max_item_count = 4 },
+          { name = "path", priority = 50, max_item_count = 4 },
+          { name = "calc", priority = 40, max_item_count = 4 },
+          { name = "git", priority = 40, max_item_count = 4 },
           { name = "nvim_lsp_document_symbol" },
           { name = "nvim_lsp_signature_help" },
           { name = "omni" },
-        }),
+          {
+            name = "nvim_lsp",
+            entry_filter = function(entry, _)
+              return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+            end,
+            priority = 80,
+            max_item_count = 8,
+          },
+        },
+        sorting = {
+          priority_weight = 1.0,
+          comparators = {
+            cmp.config.compare.scopes,
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind, -- compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
         window = {
           completion = {
             border = "rounded",
@@ -64,10 +93,9 @@ return {
           documentation = {
             border = "rounded",
           },
-          experimental = {
-            ghost_text = true,
-            native_menu = true,
-          },
+        },
+        experimental = {
+          ghost_text = true,
         },
         formatting = {
           format = require("lspkind").cmp_format({
@@ -79,6 +107,7 @@ return {
               path = "[Path]",
               luasnip = "[Snip]",
               nvim_lua = "[Lua]",
+              rg = "[rg]",
             },
           }),
         },

@@ -32,7 +32,6 @@ local config = {
     source = false,
     format = format_diagnostic,
   },
-  float = false,
   virtual_text = {
     prefix = "",
     spacing = 2,

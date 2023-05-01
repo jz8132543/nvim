@@ -18,6 +18,7 @@ return {
           check = {
             command = "clippy",
             features = "all",
+            extraArgs = { "--all", "--", "-W", "clippy::all" },
           },
           procMacro = {
             enable = true,
@@ -25,7 +26,8 @@ return {
         },
       },
       server = {
-        on_attach = function(_, bufnr)
+        on_attach = function(client, bufnr)
+          require("plugins.lsp.utils").on_attach(client, bufnr)
           vim.keymap.set("n", "K", require("rust-tools").hover_actions.hover_actions, { buffer = bufnr })
           vim.keymap.set(
             "n",
@@ -34,6 +36,7 @@ return {
             { buffer = bufnr }
           )
           vim.keymap.set("n", "<F5>", require("rust-tools").runnables.runnables, { buffer = bufnr })
+          vim.keymap.set("n", "<F6>", require("rust-tools").debuggables.debuggables, { buffer = bufnr })
         end,
       },
     },

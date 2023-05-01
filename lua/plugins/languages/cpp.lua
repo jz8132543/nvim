@@ -3,7 +3,15 @@ return {
     "p00f/clangd_extensions.nvim",
     event = "VeryLazy",
     ft = { "cpp", "c" },
-    config = true,
+    config = function()
+      require("clangd_extensions").setup({
+        server = {
+          on_attach = function(_, bufnr)
+            vim.keymap.set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<CR>", { buffer = bufnr })
+          end,
+        },
+      })
+    end,
   },
   -- {
   --   "TwIStOy/cpp-toolkit.nvim",
