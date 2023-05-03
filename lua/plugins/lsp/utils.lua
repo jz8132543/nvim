@@ -50,6 +50,8 @@ function M.on_attach(client, bufnr)
       border = "rounded",
     },
   }, bufnr)
+  -- key maps
+  require("plugins.lsp.keymaps").on_attach(client, bufnr)
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("LspFormat", {}),
