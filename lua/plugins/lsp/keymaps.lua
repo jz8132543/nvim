@@ -20,11 +20,11 @@ function M.on_attach(client, buffer)
             mode = "v",
           },
         },
-      },
-      l = {
-        name = "+lsp",
-        i = { "<cmd>LspInfo<cr>", "Lsp Info" },
-        I = { "<cmd>lua print(vim.inspect(vim.lsp.get_active_clients()))<cr>", "Lsp Details" },
+        l = {
+          name = "+lsp",
+          i = { "<cmd>LspInfo<cr>", "Lsp Info" },
+          I = { "<cmd>lua print(vim.inspect(vim.lsp.get_active_clients()))<cr>", "Lsp Details" },
+        },
       },
     },
     g = {

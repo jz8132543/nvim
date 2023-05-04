@@ -1,5 +1,5 @@
 return {
-  "mawkler/onedark.nvim",
+  "navarasu/onedark.nvim",
   priority = 999,
   name = "onedark",
   lazy = false,
