@@ -24,17 +24,11 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-omni",
       "lukas-reineke/cmp-rg",
       "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-calc",
-      "petertriho/cmp-git",
     },
 
     config = function()
-      -- vim.cmd("set completeopt=menu,menuone,noselect")
-      -- vim.cmd("set complete=")
-      vim.cmd("set completeopt=menu,menuone,noinsert")
       local cmp = require("cmp")
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local luasnip = require("luasnip")
@@ -78,11 +72,8 @@ return {
           { name = "buffer",                  priority = 60, max_item_count = 4 },
           { name = "nvim_lua",                priority = 55, max_item_count = 4 },
           { name = "path",                    priority = 50, max_item_count = 4 },
-          { name = "calc",                    priority = 40, max_item_count = 4 },
-          { name = "git",                     priority = 40, max_item_count = 4 },
           { name = "nvim_lsp_document_symbol" },
           { name = "nvim_lsp_signature_help" },
-          { name = "omni" },
           {
             name = "nvim_lsp",
             entry_filter = function(entry, _)
@@ -121,7 +112,6 @@ return {
               luasnip = "[Snip]",
               nvim_lua = "[Lua]",
               rg = "[rg]",
-              omni = "[Omni]",
             },
           }),
         },

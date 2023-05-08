@@ -44,12 +44,12 @@ function M.on_attach(client, bufnr)
   -- Enable formatting for ranges
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   -- Lsp signature
-  -- require("lsp_signature").on_attach({
-  --   bind = true, -- This is mandatory, otherwise border config won't get registered.
-  --   handler_opts = {
-  --     border = "rounded",
-  --   },
-  -- }, bufnr)
+  require("lsp_signature").on_attach({
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "rounded",
+    },
+  }, bufnr)
   -- key maps
   require("plugins.lsp.keymaps").on_attach(client, bufnr)
   if client.supports_method("textDocument/formatting") then
