@@ -1,29 +1,15 @@
 local servers = require("plugins.lsp.servers")
-M = {}
 
-M.on_attach = function(client, bufnr)
-  -- Enable formatting for ranges
-  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-  -- Lsp signature
-  require("lsp_signature").on_attach({
-    bind = true, -- This is mandatory, otherwise border config won't get registered.
-    handler_opts = {
-      border = "rounded",
-    },
-  }, bufnr)
-  require("plugins.lsp.format").on_attach(client, bufnr)
-end
-
-M.init = {
+return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim", config = true },
-      { "williamboman/mason.nvim", config = true, cmd = "Mason" },
-      { "williamboman/mason-lspconfig.nvim", config = true },
+      { "folke/neoconf.nvim",                        cmd = "Neoconf", config = true },
+      { "folke/neodev.nvim",                         config = true },
+      { "williamboman/mason.nvim",                   config = true,   cmd = "Mason" },
+      { "williamboman/mason-lspconfig.nvim",         config = true },
       { "WhoIsSethDaniel/mason-tool-installer.nvim", config = true },
       "hrsh7th/cmp-nvim-lsp",
       "ray-x/lsp_signature.nvim",
@@ -116,14 +102,12 @@ M.init = {
     event = "BufRead",
     config = true,
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "TroubleToggle" },
+      { "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "TroubleToggle" },
       { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
-      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "document diagnostics" },
-      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
-      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "loclist" },
-      { "gR", "<cmd>TroubleToggle lsp_references<cr>", desc = "References" },
+      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "document diagnostics" },
+      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "quickfix" },
+      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "loclist" },
+      { "gR",         "<cmd>TroubleToggle lsp_references<cr>",        desc = "References" },
     },
   },
 }
-
-return M.init

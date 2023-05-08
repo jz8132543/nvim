@@ -33,17 +33,17 @@ return {
 
     config = function()
       -- vim.cmd("set completeopt=menu,menuone,noselect")
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-      vim.cmd("set completeopt=menu,noinsert")
+      -- vim.cmd("set complete=")
+      vim.cmd("set completeopt=menu,menuone,noinsert")
       local cmp = require("cmp")
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local luasnip = require("luasnip")
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
       cmp.setup({
+        preselect = cmp.PreselectMode.Disabled,
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -73,13 +73,13 @@ return {
           end, { "i", "s" }),
         }),
         sources = {
-          { name = "luasnip", priority = 70, max_item_count = 8 },
-          { name = "rg", priority = 65, max_item_count = 4 },
-          { name = "buffer", priority = 60, max_item_count = 4 },
-          { name = "nvim_lua", priority = 55, max_item_count = 4 },
-          { name = "path", priority = 50, max_item_count = 4 },
-          { name = "calc", priority = 40, max_item_count = 4 },
-          { name = "git", priority = 40, max_item_count = 4 },
+          { name = "luasnip",                 priority = 70, max_item_count = 8 },
+          { name = "rg",                      priority = 65, max_item_count = 4 },
+          { name = "buffer",                  priority = 60, max_item_count = 4 },
+          { name = "nvim_lua",                priority = 55, max_item_count = 4 },
+          { name = "path",                    priority = 50, max_item_count = 4 },
+          { name = "calc",                    priority = 40, max_item_count = 4 },
+          { name = "git",                     priority = 40, max_item_count = 4 },
           { name = "nvim_lsp_document_symbol" },
           { name = "nvim_lsp_signature_help" },
           { name = "omni" },
@@ -108,6 +108,7 @@ return {
         },
         experimental = {
           ghost_text = true,
+          native_menu = false,
         },
         formatting = {
           format = require("lspkind").cmp_format({
