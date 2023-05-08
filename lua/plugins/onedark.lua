@@ -1,10 +1,13 @@
 return {
-  "navarasu/onedark.nvim",
-  priority = 999,
-  name = "onedark",
+  "olimorris/onedarkpro.nvim",
+  priority = 1000,
   lazy = false,
   config = function()
-    require("onedark").setup({})
-    vim.cmd.colorscheme("onedark")
+    require("onedarkpro").setup({
+      options = {
+        highlight_inactive_windows = true,
+      },
+    })
+    vim.cmd.colorscheme("onedark_vivid")
   end,
 }

@@ -32,25 +32,45 @@ return {
     },
 
     config = function()
-      vim.cmd("set completeopt=menu,menuone,noselect")
+      -- vim.cmd("set completeopt=menu,menuone,noselect")
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+      vim.cmd("set completeopt=menu,noinsert")
       local cmp = require("cmp")
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      local luasnip = require("luasnip")
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
       cmp.setup({
         snippet = {
           expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<TAB>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.confirm({ select = true })
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
         }),
         sources = {
           { name = "luasnip", priority = 70, max_item_count = 8 },
@@ -86,14 +106,6 @@ return {
             cmp.config.compare.order,
           },
         },
-        window = {
-          completion = {
-            border = "rounded",
-          },
-          documentation = {
-            border = "rounded",
-          },
-        },
         experimental = {
           ghost_text = true,
         },
@@ -108,6 +120,7 @@ return {
               luasnip = "[Snip]",
               nvim_lua = "[Lua]",
               rg = "[rg]",
+              omni = "[Omni]",
             },
           }),
         },

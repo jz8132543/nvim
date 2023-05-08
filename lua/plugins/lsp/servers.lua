@@ -26,6 +26,8 @@ local servers = {
         pylint = { enabled = true, executable = "pylint" },
         rope_autoimport = { enabled = true },
         rope_completion = { enabled = true },
+        pyls_isort = { enabled = true },
+        pylsp_mypy = { enabled = true },
       },
     },
   },

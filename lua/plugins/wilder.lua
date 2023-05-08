@@ -2,6 +2,7 @@ return {
   {
     "gelguy/wilder.nvim",
     event = "VeryLazy",
+    disable = true,
     config = function()
       local wilder = require("wilder")
       wilder.setup({ modes = { ":", "/\v", "?" } })

@@ -3,7 +3,6 @@ vim.g.maplocalleader = " "
 
 vim.opt.autowrite = true -- enable auto write
 vim.opt.cmdheight = 1
-vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.conceallevel = 3 -- Hide * markup for bold and italic
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 vim.opt.cursorline = true -- Enable highlighting of the current line
