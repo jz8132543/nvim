@@ -6,5 +6,6 @@ with import <nixpkgs> {};
       nil
       alejandra
       taplo
+      lefthook
     ];
   }
