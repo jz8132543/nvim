@@ -1,3 +1,10 @@
+-- Neovide
+if vim.g.neovide then
+  --Put anything you want to happen only in Neovide here
+  vim.cmd([[
+    map! <C-S-v> <C-R>+
+  ]])
+end
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<A-left>", "<C-w>h")
 vim.keymap.set("n", "<A-down>", "<C-w>j")
