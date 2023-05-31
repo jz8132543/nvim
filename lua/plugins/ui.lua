@@ -43,7 +43,7 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+    event = "VeryLazy",
     config = {
       char = "▏",
       show_end_of_line = true,
