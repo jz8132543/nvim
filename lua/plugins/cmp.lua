@@ -14,7 +14,8 @@ return {
   -- auto completion
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
+    event = "VeryLazy",
     dependencies = {
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-buffer",
@@ -27,7 +28,6 @@ return {
       "lukas-reineke/cmp-rg",
       "hrsh7th/cmp-nvim-lua",
     },
-
     config = function()
       local cmp = require("cmp")
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -52,9 +52,8 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.confirm({ select = true })
-            -- elseif luasnip.expand_or_jumpable() then
-            --   luasnip.expand_or_jump()
-
+              -- elseif luasnip.expand_or_jumpable() then
+              --   luasnip.expand_or_jump()
             elseif luasnip.jumpable(1) then
               luasnip.jump(1)
             else
@@ -70,11 +69,11 @@ return {
           end, { "i", "s" }),
         }),
         sources = {
-          { name = "luasnip",                 priority = 70, max_item_count = 8 },
-          { name = "rg",                      priority = 65, max_item_count = 4 },
-          { name = "buffer",                  priority = 60, max_item_count = 4 },
-          { name = "nvim_lua",                priority = 55, max_item_count = 4 },
-          { name = "path",                    priority = 50, max_item_count = 4 },
+          { name = "luasnip", priority = 70, max_item_count = 8 },
+          { name = "rg", priority = 65, max_item_count = 4 },
+          { name = "buffer", priority = 60, max_item_count = 4 },
+          { name = "nvim_lua", priority = 55, max_item_count = 4 },
+          { name = "path", priority = 50, max_item_count = 4 },
           { name = "nvim_lsp_document_symbol" },
           { name = "nvim_lsp_signature_help" },
           {
@@ -118,6 +117,25 @@ return {
             },
           }),
         },
+      })
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!" },
+            },
+          },
+        }),
       })
     end,
   },
