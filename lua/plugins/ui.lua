@@ -5,7 +5,6 @@ return {
     event = "VeryLazy",
     config = true,
   },
-
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
@@ -40,7 +39,6 @@ return {
       },
     },
   },
-
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
@@ -50,7 +48,6 @@ return {
       buftype_exclude = { "terminal", "nofile" },
     },
   },
-
   {
     "echasnovski/mini.indentscope",
     event = { "BufReadPre", "BufNewFile" },
@@ -67,14 +64,39 @@ return {
       })
     end,
   },
-
+  {
+    "google/executor.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    event = "VeryLazy",
+    opts = true,
+    keys = {
+      { "<leader>ee", "<cmd>ExecutorRun<cr>", desc = "Run Command" },
+      { "<leader>ev", "<cmd>ExecutorToggleDetail<cr>", desc = "Toggle Run Detail" },
+      { "<leader>er", "<cmd>ExecutorReset<cr>", desc = "Reset Command" },
+    },
+  },
+  {
+    "SmiteshP/nvim-navbuddy",
+    event = "VeryLazy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("nvim-navbuddy").setup({
+        lsp = { auto_attach = true },
+      })
+    end,
+    keys = {
+      { "<leader>cs", "<cmd>Navbuddy<cr>", desc = "Navbuddy Symbol" },
+    },
+  },
   {
     "j-hui/fidget.nvim",
     event = "LspAttach",
     enabled = true,
     config = true,
   },
-
   {
     "petertriho/nvim-scrollbar",
     event = "VeryLazy",

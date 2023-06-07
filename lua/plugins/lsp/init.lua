@@ -6,10 +6,10 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neoconf.nvim",                        cmd = "Neoconf", config = true },
-      { "folke/neodev.nvim",                         config = true },
-      { "williamboman/mason.nvim",                   config = true,   cmd = "Mason" },
-      { "williamboman/mason-lspconfig.nvim",         config = true },
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+      { "folke/neodev.nvim", config = true },
+      { "williamboman/mason.nvim", config = true, cmd = "Mason" },
+      { "williamboman/mason-lspconfig.nvim", config = true },
       { "WhoIsSethDaniel/mason-tool-installer.nvim", config = true },
       "hrsh7th/cmp-nvim-lsp",
       "ray-x/lsp_signature.nvim",
@@ -83,10 +83,9 @@ return {
 
   -- Winbar
   {
-    "utilyre/barbecue.nvim",
+    "Bekaboo/dropbar.nvim",
     event = "VeryLazy",
     dependencies = {
-      "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons",
     },
     config = true,
@@ -102,12 +101,12 @@ return {
     event = "BufRead",
     config = true,
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "TroubleToggle" },
+      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "TroubleToggle" },
       { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
-      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "document diagnostics" },
-      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "quickfix" },
-      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "loclist" },
-      { "gR",         "<cmd>TroubleToggle lsp_references<cr>",        desc = "References" },
+      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "document diagnostics" },
+      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
+      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "loclist" },
+      { "gR", "<cmd>TroubleToggle lsp_references<cr>", desc = "References" },
     },
   },
 }
