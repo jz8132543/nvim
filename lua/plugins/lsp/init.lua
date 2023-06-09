@@ -42,7 +42,7 @@ return {
         sources = {
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.rustfmt,
-          -- nls.builtins.formatting.nixpkgs_fmt,
+          nls.builtins.formatting.terraform_fmt,
           --         nls.builtins.formatting.clang_format,
           --         nls.builtins.formatting.cmake_format,
           --         nls.builtins.formatting.shfmt,
