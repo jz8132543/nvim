@@ -43,9 +43,9 @@ return {
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.rustfmt,
           nls.builtins.formatting.terraform_fmt,
+          nls.builtins.formatting.shfmt,
           --         nls.builtins.formatting.clang_format,
           --         nls.builtins.formatting.cmake_format,
-          --         nls.builtins.formatting.shfmt,
           --         nls.builtins.formatting.prettierd.with({
           --           filetypes = { "markdown" }, -- only runs `deno fmt` for markdown
           --         }),
