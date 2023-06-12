@@ -1,7 +1,8 @@
 return {
   {
-    "simrat39/rust-tools.nvim",
-    event = "VeryLazy",
+    -- "simrat39/rust-tools.nvim",
+    "Ciel-MC/rust-tools.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     ft = "rust",
     opts = {
       tools = {
