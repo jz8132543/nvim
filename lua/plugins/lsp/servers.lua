@@ -10,12 +10,10 @@ local servers = {
   taplo = {},
   terraformls = {},
   tflint = {},
-  nil_ls = {
+  nixd = {
     settings = {
-      ["nil"] = {
-        formatting = {
-          command = { "alejandra" },
-        },
+      formatting = {
+        command = { "alejandra" },
       },
     },
   },
@@ -32,7 +30,7 @@ local servers = {
       },
     },
   },
-  sumneko_lua = {
+  lua_ls = {
     settings = {
       Lua = {
         workspace = {

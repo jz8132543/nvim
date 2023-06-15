@@ -45,6 +45,8 @@ return {
           nls.builtins.formatting.terraform_fmt,
           nls.builtins.formatting.prettierd,
           nls.builtins.formatting.shfmt,
+          nls.builtins.formatting.asmfmt,
+          nls.builtins.formatting.alejandra,
           -- nls.builtins.formatting.clang_format,
           -- nls.builtins.formatting.cmake_format,
           -- nls.builtins.formatting.prettierd.with({
