@@ -14,9 +14,9 @@ require("lazy").setup("plugins", {
   defaults = { lazy = true },
   checker = { enabled = false },
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
-  install = {
-    colorscheme = { "onedark" },
-  },
+  -- install = {
+  --   colorscheme = { "onedark" },
+  -- },
   performance = {
     rtp = {
       disabled_plugins = {
