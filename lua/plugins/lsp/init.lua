@@ -12,7 +12,6 @@ return {
       { "williamboman/mason-lspconfig.nvim", config = true },
       { "WhoIsSethDaniel/mason-tool-installer.nvim", config = true },
       "hrsh7th/cmp-nvim-lsp",
-      "ray-x/lsp_signature.nvim",
     },
     config = function()
       -- diagnostics
@@ -27,6 +26,47 @@ return {
         require("lspconfig")[server].setup(opts)
       end
     end,
+  },
+  -- Winbar
+  {
+    "Bekaboo/dropbar.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = true,
+  },
+  -- UI
+  {
+    "dnlhc/glance.nvim",
+    event = "BufRead",
+    config = true,
+  },
+  {
+    "folke/trouble.nvim",
+    event = "BufRead",
+    config = true,
+    keys = {
+      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "TroubleToggle" },
+      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
+      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "document diagnostics" },
+      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
+      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "loclist" },
+      { "gR", "<cmd>TroubleToggle lsp_references<cr>", desc = "References" },
+    },
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      handler_opts = {
+        border = "none", -- double, rounded, single, shadow, none, or a table of borders
+      },
+      hint_prefix = "💡",
+      max_height = 4,
+      toggle_key = [[<M-x>]], -- toggle signature on and off in insert mode,  e.g. '<M-x>'
+      select_signature_key = [[<M-c>]], -- toggle signature on and off in insert mode,  e.g. '<M-x>'
+    },
   },
 
   -- formatters
@@ -68,48 +108,7 @@ return {
         },
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
         on_attach = require("plugins.lsp.utils").on_attach,
-        -- on_attach = function(client, bufnr)
-        --   if client.supports_method("textDocument/formatting") then
-        --     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        --     vim.api.nvim_create_autocmd("BufWritePre", {
-        --       group = augroup,
-        --       buffer = bufnr,
-        --       callback = function()
-        --         vim.lsp.buf.format()
-        --       end,
-        --     })
-        --   end
-        -- end,
       })
     end,
-  },
-
-  -- Winbar
-  {
-    "Bekaboo/dropbar.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = true,
-  },
-  -- UI
-  {
-    "dnlhc/glance.nvim",
-    event = "BufRead",
-    config = true,
-  },
-  {
-    "folke/trouble.nvim",
-    event = "BufRead",
-    config = true,
-    keys = {
-      { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "TroubleToggle" },
-      { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
-      { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "document diagnostics" },
-      { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
-      { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "loclist" },
-      { "gR", "<cmd>TroubleToggle lsp_references<cr>", desc = "References" },
-    },
   },
 }

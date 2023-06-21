@@ -43,13 +43,17 @@ end
 function M.on_attach(client, bufnr)
   -- Enable formatting for ranges
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-  -- Lsp signature
-  -- require("lsp_signature").on_attach({
-  --   bind = true, -- This is mandatory, otherwise border config won't get registered.
-  --   handler_opts = {
-  --     border = "rounded",
-  --   },
-  -- }, bufnr)
+  -- inlay hint
+  vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+    callback = function()
+      vim.lsp.buf.inlay_hint(0, true)
+    end,
+  })
+  vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+    callback = function()
+      vim.lsp.buf.inlay_hint(0, false)
+    end,
+  })
   -- key maps
   require("plugins.lsp.keymaps").on_attach(client, bufnr)
   if client.supports_method("textDocument/formatting") then

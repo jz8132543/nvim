@@ -75,30 +75,30 @@ return {
           { name = "nvim_lua", priority = 55, max_item_count = 4 },
           { name = "path", priority = 50, max_item_count = 4 },
           { name = "nvim_lsp_document_symbol" },
-          { name = "nvim_lsp_signature_help" },
+          -- { name = "nvim_lsp_signature_help" },
           {
             name = "nvim_lsp",
             entry_filter = function(entry, _)
               return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
             end,
-            priority = 80,
+            priority = 99,
             max_item_count = 8,
           },
         },
-        sorting = {
-          priority_weight = 1.0,
-          comparators = {
-            cmp.config.compare.scopes,
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.locality,
-            cmp.config.compare.kind, -- compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-          },
-        },
+        -- sorting = {
+        --   priority_weight = 1.0,
+        --   comparators = {
+        --     cmp.config.compare.scopes,
+        --     cmp.config.compare.offset,
+        --     cmp.config.compare.exact,
+        --     cmp.config.compare.score,
+        --     cmp.config.compare.recently_used,
+        --     cmp.config.compare.locality,
+        --     cmp.config.compare.kind, -- compare.sort_text,
+        --     cmp.config.compare.length,
+        --     cmp.config.compare.order,
+        --   },
+        -- },
         experimental = {
           ghost_text = true,
           native_menu = false,

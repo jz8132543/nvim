@@ -135,18 +135,37 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      local map = vim.keymap.set
-      map("n", "<Leader>gp", ":Gitsigns prev_hunk<CR>", { desc = "Plug Gitsigns: jump to prev hunk" })
-      map("n", "<Leader>gn", ":Gitsigns next_hunk<CR>", { desc = "Plug Gitsigns: jump to next hunk" })
-      map("n", "<Leader>gs", ":Gitsigns preview_hunk<CR>", { desc = "Plug Gitsigns: preview hunk" })
-      map("n", "<Leader>gd", ":Gitsigns diffthis<CR>", { desc = "Plug Gitsigns: open diffmode" })
-      map("n", "<Leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "Plug Gitsigns: stage current hunk" })
-      map("n", "<Leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "Plug Gitsigns: reset current hunk" })
-      map("n", "<Leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "Plug Gitsigns: stage current buffer" })
-      map("n", "<Leader>gR", ":Gitsigns reset_buffer<CR>", { desc = "Plug Gitsigns: reset current buffer" })
-
-      require("gitsigns").setup()
+    opts = function()
+      local signs = require("config.icons").git.signs
+      return {
+        signs = {
+          add = { text = signs.add },
+          change = { text = signs.change },
+          delete = { text = signs.delete },
+          topdelete = { text = signs.topdelete },
+          changedelete = { text = signs.changedelete },
+          untracked = { text = signs.untracked },
+        },
+        preview_config = {
+          border = require("config.icons").borders.outer.all,
+          style = "minimal",
+          relative = "cursor",
+          width = 88,
+          row = 0,
+          col = 1,
+        },
+        on_attach = function(bufnr)
+          local map = vim.keymap.set
+          map("n", "<Leader>gp", ":Gitsigns prev_hunk<CR>", { desc = "Plug Gitsigns: jump to prev hunk" })
+          map("n", "<Leader>gn", ":Gitsigns next_hunk<CR>", { desc = "Plug Gitsigns: jump to next hunk" })
+          map("n", "<Leader>gs", ":Gitsigns preview_hunk<CR>", { desc = "Plug Gitsigns: preview hunk" })
+          map("n", "<Leader>gd", ":Gitsigns diffthis<CR>", { desc = "Plug Gitsigns: open diffmode" })
+          map("n", "<Leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "Plug Gitsigns: stage current hunk" })
+          map("n", "<Leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "Plug Gitsigns: reset current hunk" })
+          map("n", "<Leader>gA", ":Gitsigns stage_buffer<CR>", { desc = "Plug Gitsigns: stage current buffer" })
+          map("n", "<Leader>gR", ":Gitsigns reset_buffer<CR>", { desc = "Plug Gitsigns: reset current buffer" })
+        end,
+      }
     end,
   },
 
@@ -159,42 +178,51 @@ return {
   },
   {
     "luukvbaal/statuscol.nvim",
-    lazy = "VeryLazy",
-    config = function()
+    event = "VimEnter",
+    opts = function()
       local builtin = require("statuscol.builtin")
-      require("statuscol").setup({
-        thousands = false, -- or line number thousands separator string ("." / ",")
-        relculright = false, -- whether to right-align the cursor line number with 'relativenumber' set
-        setopt = true, -- whether to set the 'statuscolumn', providing builtin click actions
-        ft_ignore = nil, -- lua table with filetypes for which 'statuscolumn' will be unset
+      return {
+        relculright = true,
+        setopt = true,
         segments = {
-          { text = { "%C" }, click = "v:lua.ScFa" },
           {
-            text = { builtin.lnumfunc },
-            condition = { true, builtin.not_empty },
-            click = "v:lua.ScLa",
+            sign = {
+              name = {
+                "Dap",
+                "neotest", --[[ "Diagnostic" ]]
+              },
+              maxwidth = 2,
+              colwidth = 2,
+              auto = true,
+            },
+            click = "v:lua.ScSa",
           },
-          { text = { "%s" }, click = "v:lua.ScSa" },
+          { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+          { text = { " " } },
+          {
+            sign = {
+              name = { "GitSigns" },
+              maxwidth = 1,
+              colwidth = 1,
+              auto = false,
+              -- fillchar = require("config.icons").borders.outer.all[8],
+              fillcharhl = "StatusColumnSeparator",
+            },
+            click = "v:lua.ScSa",
+          },
         },
-        clickhandlers = {
-          Lnum = builtin.lnum_click,
-          FoldClose = builtin.foldclose_click,
-          FoldOpen = builtin.foldopen_click,
-          FoldOther = builtin.foldother_click,
-          DapBreakpointRejected = builtin.toggle_breakpoint,
-          DapBreakpoint = builtin.toggle_breakpoint,
-          DapBreakpointCondition = builtin.toggle_breakpoint,
-          DiagnosticSignError = builtin.diagnostic_click,
-          DiagnosticSignHint = builtin.diagnostic_click,
-          DiagnosticSignInfo = builtin.diagnostic_click,
-          DiagnosticSignWarn = builtin.diagnostic_click,
-          GitSignsTopdelete = builtin.gitsigns_click,
-          GitSignsUntracked = builtin.gitsigns_click,
-          GitSignsAdd = builtin.gitsigns_click,
-          GitSignsChangedelete = builtin.gitsigns_click,
-          GitSignsDelete = builtin.gitsigns_click,
+        ft_ignore = {
+          "help",
+          "vim",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "noice",
+          "lazy",
+          "toggleterm",
         },
-      })
+      }
     end,
   },
 

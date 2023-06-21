@@ -10,13 +10,8 @@ local servers = {
   taplo = {},
   terraformls = {},
   tflint = {},
-  nixd = {
-    settings = {
-      formatting = {
-        command = { "alejandra" },
-      },
-    },
-  },
+  nixd = {},
+  nil_ls = {},
   pylsp = {
     pylsp = {
       plugins = {
@@ -44,8 +39,12 @@ local servers = {
         },
         hint = {
           enable = true,
-          setType = true,
           arrayIndex = "Disable",
+          await = true,
+          paramName = "All",
+          paramType = true,
+          semicolon = "SameLine",
+          setType = true,
         },
         codelens = {
           enable = true,
