@@ -168,6 +168,17 @@ return {
       }
     end,
   },
+  {
+    "sindrets/diffview.nvim",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewFileHistory",
+      "DiffviewFocusFiles",
+      "DiffviewToggleFiles",
+      "DiffviewRefresh",
+      "DiffviewLog",
+    },
+  },
 
   {
     "RRethy/vim-illuminate",
