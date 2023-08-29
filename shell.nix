@@ -7,5 +7,7 @@ with import <nixpkgs> {};
       alejandra
       taplo
       lefthook
+      gcc
+      gnumake
     ];
   }
