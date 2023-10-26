@@ -6,6 +6,7 @@ return {
       "nvim-lua/plenary.nvim",
       "tsakirist/telescope-lazy.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
+      "gbrlsnchs/telescope-lsp-handlers.nvim",
     },
     keys = {
       { "<leader>tf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
@@ -27,6 +28,9 @@ return {
           ["q"] = actions.close,
         },
       }
+      require("telescope").load_extension("lazy")
+      require("telescope").load_extension("file_browser")
+      require("telescope").load_extension("lsp_handlers")
       require("telescope").setup({
         defaults = {
           mappings = mappings,
@@ -36,10 +40,9 @@ return {
           file_browser = {
             mappings = mappings,
           },
+          lsp_handlers = {},
         },
       })
-      require("telescope").load_extension("lazy")
-      require("telescope").load_extension("file_browser")
     end,
   },
 }

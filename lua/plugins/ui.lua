@@ -1,3 +1,14 @@
+-- Highlight group from rainbow-delimiters
+local highlight = {
+  "RainbowDelimiterRed",
+  "RainbowDelimiterYellow",
+  "RainbowDelimiterBlue",
+  "RainbowDelimiterOrange",
+  "RainbowDelimiterGreen",
+  "RainbowDelimiterViolet",
+  "RainbowDelimiterCyan",
+}
+
 return {
   { "MunifTanjim/nui.nvim" },
   {
@@ -41,12 +52,19 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    config = {
-      char = "▏",
-      show_end_of_line = true,
-      buftype_exclude = { "terminal", "nofile" },
+    event = "VeryLazy",
+    opts = {
+      scope = {
+        enabled = true,
+        highlight = highlight,
+      },
     },
+    config = function(_, opts)
+      require("ibl").setup(opts)
+
+      local hooks = require("ibl.hooks")
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    end,
   },
   {
     "echasnovski/mini.indentscope",
@@ -154,7 +172,7 @@ return {
           row = 0,
           col = 1,
         },
-        on_attach = function(bufnr)
+        on_attach = function()
           local map = vim.keymap.set
           map("n", "<Leader>gp", ":Gitsigns prev_hunk<CR>", { desc = "Plug Gitsigns: jump to prev hunk" })
           map("n", "<Leader>gn", ":Gitsigns next_hunk<CR>", { desc = "Plug Gitsigns: jump to next hunk" })
