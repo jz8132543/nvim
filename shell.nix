@@ -9,5 +9,6 @@ with import <nixpkgs> {};
       lefthook
       gcc
       gnumake
+      nodePackages.npm
     ];
   }
