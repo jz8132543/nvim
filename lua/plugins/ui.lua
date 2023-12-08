@@ -205,55 +205,6 @@ return {
       require("illuminate").configure({ delay = 200 })
     end,
   },
-  {
-    "luukvbaal/statuscol.nvim",
-    event = "VimEnter",
-    opts = function()
-      local builtin = require("statuscol.builtin")
-      return {
-        relculright = true,
-        setopt = true,
-        segments = {
-          {
-            sign = {
-              name = {
-                "Dap",
-                "neotest", --[[ "Diagnostic" ]]
-              },
-              maxwidth = 2,
-              colwidth = 2,
-              auto = true,
-            },
-            click = "v:lua.ScSa",
-          },
-          { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
-          { text = { " " } },
-          {
-            sign = {
-              name = { "GitSigns" },
-              maxwidth = 1,
-              colwidth = 1,
-              auto = false,
-              -- fillchar = require("config.icons").borders.outer.all[8],
-              fillcharhl = "StatusColumnSeparator",
-            },
-            click = "v:lua.ScSa",
-          },
-        },
-        ft_ignore = {
-          "help",
-          "vim",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "noice",
-          "lazy",
-          "toggleterm",
-        },
-      }
-    end,
-  },
 
   {
     "goolord/alpha-nvim",
