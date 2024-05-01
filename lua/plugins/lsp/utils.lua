@@ -41,18 +41,16 @@ function M.list_registered(filetype)
 end
 
 function M.on_attach(client, bufnr)
-  -- Enable formatting for ranges
-  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   -- inlay hint
   if client.supports_method("textDocument/inlayHint") then
     vim.api.nvim_create_autocmd({ "InsertEnter" }, {
       callback = function()
-        vim.lsp.inlay_hint.enable(bufnr, true)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end,
     })
     vim.api.nvim_create_autocmd({ "InsertLeave" }, {
       callback = function()
-        vim.lsp.inlay_hint.enable(bufnr, false)
+        vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
       end,
     })
   end
