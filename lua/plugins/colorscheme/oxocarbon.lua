@@ -1,0 +1,5 @@
+---@type LazyPluginSpec
+return {
+  "nyoom-engineering/oxocarbon.nvim",
+  lazy = true,
+}
