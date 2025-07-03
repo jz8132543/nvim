@@ -22,7 +22,7 @@ return {
   event = "VeryLazy",
   keys = {
     {
-      "s",
+      "Ss",
       mode = { "n" },
       function()
         require("flash").treesitter()
@@ -30,7 +30,7 @@ return {
       desc = "Select Treesitter Node",
     },
     {
-      "S",
+      "SS",
       mode = { "n" },
       function()
         require("flash").treesitter_search()

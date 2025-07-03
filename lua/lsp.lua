@@ -142,14 +142,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { buffer = bufnr, desc = "List workspace folders" })
 
-    -- Enable code lens
-    -- if client and client.server_capabilities.codeLensProvider then
-    --   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-    --     buffer = bufnr,
-    --     callback = function()
-    --       vim.lsp.codelens.refresh()
-    --     end,
-    --   })
-    -- end
+    -- Enable
+    -- code
+    -- lens
+    if client and client.server_capabilities.codeLensProvider then
+      vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.codelens.refresh()
+        end,
+      })
+    end
   end,
 })
