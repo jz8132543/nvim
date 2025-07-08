@@ -1,10 +1,18 @@
 local custom = require "custom"
+local function build_plugin()
+  if vim.uv.fs_stat("/etc/nixos") then
+    return "nix run .#build-plugin"
+  else
+    return "cargo build --release"
+  end
+end
 
 ---@type LazyPluginSpec
 return {
   ---@module 'blink.cmp'
   "Saghen/blink.cmp",
   version = "*",
+  build = build_plugin(),
   -- build = "cargo build --release",
   ---@type blink.cmp.Config
   opts = {

@@ -18,6 +18,7 @@ local locals = require "locals"
 require("lazy").setup {
   spec = "plugins",
   ---@diagnostic disable-next-line: assign-type-mismatch
+  rocks = { root = vim.fn.stdpath("data") .. "/lazy-rocks", server = "https://nvim-neorocks.github.io/rocks-binaries/" },
   dev = {
     path = "~/neovim/dev",
     patterns = locals.under_development,
