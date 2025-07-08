@@ -163,4 +163,5 @@ vim.lsp.enable {
   "vue_ls",
   "vtsls",
   "zls",
+  "nixd",
 }
