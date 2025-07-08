@@ -1,4 +1,10 @@
 local locals = require "locals"
+local is_nixos = function()
+  return vim.fn.filewritable "/etc/NIXOS"
+end
+
+local parser_install_dir = "~/.config/nvim-treesitter-parsers"
+vim.opt.rtp:append(parser_install_dir)
 
 ---@type LazyPluginSpec
 return {
@@ -8,9 +14,11 @@ return {
   build = ":TSUpdate",
   opts = {
     ---@diagnostic disable-next-line: param-type-mismatch
-    parser_install_dir = vim.fs.joinpath(vim.fn.stdpath "data", "site"),
-    auto_install = true,
-    -- ensure_installed = "all",
+    -- parser_install_dir = vim.fs.joinpath(vim.fn.stdpath "data", "site"),
+    auto_install = false,
+    sync_install = not is_nixos,
+    -- ensure_installed = {  },
+    parser_install_dir = parser_install_dir,
     highlight = {
       enable = true,
       -- Should be controlled by vimtex
