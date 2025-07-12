@@ -1,5 +1,6 @@
 local utils = require "utils"
 
+vim.keymap.set('v', '<C-y>', '"+y')
 vim.keymap.set("t", "<Esc>", "<C-\\><C-N>")
 vim.keymap.set("c", "<C-p>", "<Up>")
 vim.keymap.set("c", "<C-n>", "<Down>")
