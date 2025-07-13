@@ -1,16 +1,28 @@
+local hostname = vim.fn.hostname()
+local username = os.getenv('USER')
 ---@type vim.lsp.Config
 return {
   settings = {
     nixd = {
+      formatting = {
+        command = { 'nixfmt' },
+      },
       nixpkgs = {
-        expr = 'import (builtins.getFlake "/home/ofseed/flake").inputs.nixpkgs {  }',
+        expr = 'import (builtins.getFlake ("git+file://" + toString ./.)).inputs.nixpkgs {  }',
       },
       options = {
         nixos = {
-          expr = '(builtins.getFlake "/home/ofseed/flake").nixosConfigurations.ofseed.options',
+          expr = string.format(
+            '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.%s.options',
+            hostname
+          ),
         },
         home_manager = {
-          expr = '(builtins.getFlake "/home/ofseed/flake").homeConfigurations.ofseed.options',
+          expr = string.format(
+            '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."%s@%s".options',
+            username,
+            hostname
+          ),
         },
       },
     },
